@@ -1,0 +1,11 @@
+alias lsa='ls -a'
+alias ls='ls --color=auto'
+alias vi='nvim'
+alias bs='brew services'
+alias z='zoxide'
+alias e='exit'
+alias c='clear'
+alias lg='lazygit'
+
+alias vimrc='~/.config/nvim/init.lua'
+

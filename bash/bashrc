@@ -1,0 +1,28 @@
+# e
+
+# append to the history file, don't overwrite it
+shopt -s histappend
+
+# Alias definitions.
+if [ -f ~/.config/bash/bash_aliases ]; then
+    . ~/.config/bash/bash_aliases
+fi
+
+
+git_prompt() {
+    #https://www.youtube.com/watch?v=-gYtV9z7hhw
+    local branch="$(git symbolic-ref HEAD 2> /dev/null | cut -d'/' -f3)"
+    [ -n "${branch}" ] && echo "(שׂ ${branch}) "
+}
+
+
+#PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+PS1='\[\033[01;32m\]\u@\h\[\033[00m\] \[\033[01;34m\]\w\[\033[00m\] $(git_prompt)'
+# PS1='\[\033[01;34m\]\w\[\033[00m\] $(git_prompt)'
+
+export BASH_SILENCE_DEPRECATION_WARNING=1
+export PATH=/opt/homebrew/bin/:$PATH
+export VISUAL=nvim
+export EDITOR=nvim
+eval "$(zoxide init bash)"
+
