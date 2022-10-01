@@ -1,0 +1,18 @@
+# Edvard
+live_config_reload: true
+import:
+  - ~/.config/alacritty/nord.yml
+
+window:
+  decorations: buttonless
+  padding:
+    x: 5
+    y: 5
+  opacity: 0.9
+
+
+font:
+  normal:
+    family: "MesloLGS NF"
+  size: 16
+
