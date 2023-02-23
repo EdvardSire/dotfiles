@@ -1,14 +1,3 @@
-# echo
-# echo "What platform are you configuring?"
-# echo "1) macOS"
-# echo "2) unix"
-# read -p "Enter [1/2] for setup else [Q/q] for exit" -n 1 -r -s 
-# echo
-# if [[ $REPLY =~ ^[Qq]$ ]]
-# then
-# 	exit 0 
-# fi
-
 echo
 echo "You are about to install dotfiles."
 echo "Relevant configuration files in .config will be overwitten. "
@@ -31,7 +20,6 @@ then
             start="${PWD}/${dir}"
             end="$HOME/.config"
 	    under="$end/${dir}"
-	    echo $end
 		
 	    if [ -d $under ]; then
 	       rm -rf $under 
