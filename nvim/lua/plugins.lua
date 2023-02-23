@@ -42,7 +42,16 @@ require('packer').startup(function()
             {'rafamadriz/friendly-snippets'},
         }
     }
+    use 'lervag/vimtex'
 end)
+
+require("telescope").setup({
+	defaults = {
+		file_ignore_patterns = {
+			"node_modules", "build", "dist", "yarn.lock"
+		}
+	}
+})
 
 require("nvim-tree").setup({
     hijack_cursor = true,
