@@ -3,6 +3,9 @@ live_config_reload: true
 import:
   - ~/.config/alacritty/nord.yml
 
+env:
+  TERM: xterm-256color
+
 window:
   decorations: buttonless
   padding:
@@ -13,6 +16,12 @@ window:
 
 font:
   normal:
-    family: "MesloLGS NF"
+    family: "SFMono Nerd Font"
+    style: Light
   size: 14
+
+key_bindings:
+  - { key: Space,  mods: Shift|Control,           action: ToggleViMode}
+#   - { key: T, mods: Command, chars: "\x02c" }
+#   - { key: G, mods: Command, chars: "\x02g" }
 
