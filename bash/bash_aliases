@@ -1,12 +1,14 @@
-alias lsa='ls -a'
 alias ls='ls --color=auto'
-alias vi='nvim'
-alias bs='brew services'
-alias z='zoxide'
-alias e='exit'
+alias lsa='ls -a'
+alias ll='ls -l -a'
+
 alias c='clear'
+alias e='exit'
+
+alias z='zoxide'
 alias lg='lazygit'
-alias ll='ls -l'
+alias vi='nvim'
+alias t='tmux'
 
 alias gs='git status'
 alias ga='git add'
@@ -17,3 +19,5 @@ alias gr='git remote -vv'
 alias gl='git log --graph --all'
 alias gd='git diff'
 alias gr='git restore'
+
+alias bs='brew services'
