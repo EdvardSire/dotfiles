@@ -1,10 +1,8 @@
 # Edvard
 live_config_reload: true
+hide_cursor_when_typing: true
 import:
   - ~/.config/alacritty/nord.yml
-
-env:
-  TERM: xterm-256color
 
 window:
   decorations: buttonless
@@ -18,10 +16,12 @@ font:
   normal:
     family: "SFMono Nerd Font"
     style: Light
-  size: 14
+  size: 15
 
 key_bindings:
-  - { key: Space,  mods: Shift|Control,           action: ToggleViMode}
-#   - { key: T, mods: Command, chars: "\x02c" }
-#   - { key: G, mods: Command, chars: "\x02g" }
+  # - { key: Q, mods: Command, chars: "\x02\x60\x0a"}
+  - { key: T,  mods: Command, chars: "\x02\x63"}
+  - { key: G,  mods: Command, chars: "\x02\x67"}
+  - { key: I,  mods: Command, chars: "\x02\x70"}
+  - { key: O,  mods: Command, chars: "\x02\x6e"}
 
