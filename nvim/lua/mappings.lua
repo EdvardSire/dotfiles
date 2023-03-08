@@ -1,21 +1,21 @@
 -- Keybindings
-local keymap = vim.api.nvim_set_keymap
 
 vim.g.mapleader = ' ' -- Leader to spacebar
 
 -- keymap({mode}, {keymap}, {mapped to}, {options})
-keymap('n', '<leader>w', ':w<CR>', {})
-keymap('n', '<leader>q', ':wq<CR>', {})
-keymap('n', '<leader>f', ':NvimTreeToggle<CR>', {})
-keymap('n', '<leader>g', ':Telescope find_files<CR>', {})
-keymap('n', '<leader>m', ':!autopep8 -i %:t<CR>', {})
+vim.keymap.set('n', '<leader>w', ':w<CR>')
+vim.keymap.set('n', '<leader>q', ':wq<CR>')
+vim.keymap.set('n', '<leader>g', ':NvimTreeToggle<CR>')
+vim.keymap.set('n', '<leader>f', ':Telescope find_files<CR>')
+vim.keymap.set('n', '<leader>m', ':!autopep8 -i %:t<CR>')
+vim.keymap.set('n', '<leader>n', ':noh<CR>')
+vim.keymap.set('n', '<leader>t', vim.cmd.UndotreeToggle)
 
 
-
-keymap('i', 'jk', '<ESC>', {}) -- Normal mode
+vim.keymap.set('i', 'jk', '<ESC>') -- Normal mode
 
 -- Window movement
-keymap('n', '<C-h>', '<C-w>h', {})
-keymap('n', '<C-j>', '<C-w>j', {})
-keymap('n', '<C-k>', '<C-w>k', {})
-keymap('n', '<C-l>', '<C-w>l', {})
+vim.keymap.set('n', '<C-h>', '<C-w>h')
+vim.keymap.set('n', '<C-j>', '<C-w>j')
+vim.keymap.set('n', '<C-k>', '<C-w>k')
+vim.keymap.set('n', '<C-l>', '<C-w>l')
