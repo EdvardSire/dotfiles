@@ -24,4 +24,5 @@ key_bindings:
   - { key: G,  mods: Command, chars: "\x02\x67"}
   - { key: I,  mods: Command, chars: "\x02\x70"}
   - { key: O,  mods: Command, chars: "\x02\x6e"}
+  - { key: L,  mods: Command, chars: "\u0002\u0054"}
 
