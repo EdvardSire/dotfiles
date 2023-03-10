@@ -27,3 +27,8 @@ vim.keymap.set('n', '<leader>t', vim.cmd.UndotreeToggle)
 
 -- Gitsigns
 vim.keymap.set('n', '<leader>gb', ':Gitsigns toggle_current_line_blame<CR>')
+
+-- LSP
+-- vim.keymap.set('n', '<C-i>', vim.lsp.buf.completion)
+--
+
