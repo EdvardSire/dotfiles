@@ -35,8 +35,9 @@ local lsp_attach = function(_, bufnr) -- https://github.com/VonHeikemen/lsp-zero
   vim.keymap.set('n', 'gt',    vim.lsp.buf.type_definition, {buffer=bufnr})
   vim.keymap.set('n', '<C-k>', vim.lsp.buf.hover,           {buffer=bufnr})
   vim.keymap.set('n', '<F2>',  vim.lsp.buf.rename,          {buffer=bufnr})
-  vim.keymap.set('n', 'gp',    vim.diagnostic.goto_prev,    {buffer=bufnr})
+  vim.keymap.set('n', '<F4>',  vim.lsp.buf.code_action,     {buffer=bufnr})
 
+  vim.keymap.set('n', 'gp',    vim.diagnostic.goto_prev,    {buffer=bufnr})
   vim.keymap.set('n', 'gn',    vim.diagnostic.goto_next,    {buffer=bufnr})
   vim.keymap.set('n', 'gl',    vim.diagnostic.open_float,   {buffer=bufnr})
 end

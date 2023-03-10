@@ -62,6 +62,6 @@ return require("packer").startup(function(use)
 		end,
 	})
 	use({
-		"mhartington/formatter.nvim",
+		"sbdchd/neoformat",
 	})
 end)

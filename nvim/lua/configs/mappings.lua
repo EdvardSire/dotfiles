@@ -16,7 +16,6 @@ vim.keymap.set('n', '<leader>fa', ':Telescope find_files<CR>')
 vim.keymap.set('n', '<leader>ff', ':Telescope git_files<CR>')
 vim.keymap.set('n', '<leader>fg', ':Telescope live_grep<CR>')
 
--- Harpoon
 vim.keymap.set('n', '<leader>m', ':lua require("harpoon.mark").add_file()<CR>')
 vim.keymap.set('n', '<leader>l', ':lua require("harpoon.ui").toggle_quick_menu()<CR>')
 vim.keymap.set('n', '<leader>i', ':lua require("harpoon.ui").nav_prev()<CR>')
@@ -27,6 +26,12 @@ vim.keymap.set('n', '<leader>t', vim.cmd.UndotreeToggle)
 
 -- Gitsigns
 vim.keymap.set('n', '<leader>gb', ':Gitsigns toggle_current_line_blame<CR>')
+vim.keymap.set('n', '<leader>hh', ':Gitsigns next_hunk<CR>')
+vim.keymap.set('n', '<leader>HH', ':Gitsigns prev_hunk<CR>')
+vim.keymap.set('n', '<leader>hp', ':Gitsigns preview_hunk_inline<CR>')
+vim.keymap.set('n', '<leader>hs', ':Gitsigns stage_hunk<CR>')
+vim.keymap.set('n', '<leader>hr', ':Gitsigns reset_hunk<CR>')
+
 
 -- LSP
 -- vim.keymap.set('n', '<C-i>', vim.lsp.buf.completion)
