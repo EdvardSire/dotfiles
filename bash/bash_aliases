@@ -10,7 +10,6 @@ alias e='exit'
 alias z='zoxide'
 alias lg='lazygit'
 alias vi='nvim'
-alias t='tmux'
 
 alias gs='git status'
 alias ga='git add'
