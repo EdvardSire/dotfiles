@@ -22,10 +22,3 @@ vim.opt.scrolloff = 8
 vim.opt.cursorline = false
 vim.opt.guicursor = ""
 vim.opt.laststatus = 0
-
-
-local colorscheme = 'nord'
-local ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
-if not ok then
-	vim.notify("colorscheme " .. colorscheme .. " not found!")
-end
