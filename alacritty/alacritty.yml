@@ -1,8 +1,7 @@
-# Edvard
 live_config_reload: true
 hide_cursor_when_typing: true
 import:
-  - ~/.config/alacritty/nord.yml
+  - ~/.config/alacritty/new_nord.yml
 
 window:
   decorations: buttonless
