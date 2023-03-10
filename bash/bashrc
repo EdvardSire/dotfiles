@@ -1,13 +1,10 @@
-# e
-#
+#!/bin/bash
 
 # append to the history file, don't overwrite it
 shopt -s histappend
 
 # Alias definitions.
-if [ -f ~/.config/bash/bash_aliases ]; then
-    . ~/.config/bash/bash_aliases
-fi
+source ~/.config/bash/bash_aliases
 
 
 git_prompt() {
@@ -21,15 +18,18 @@ git_prompt() {
 PS1='\[\033[01;32m\]\u@\h\[\033[00m\] \[\033[01;34m\]\w\[\033[00m\] \n $(git_prompt)~ '
 # PS1='\[\033[01;34m\]\w\[\033[00m\] $(git_prompt)'
 
-export BASH_SILENCE_DEPRECATION_WARNING=1
-export PATH=/opt/homebrew/bin/:$PATH
-export VISUAL=nvim
-export EDITOR=nvim
-eval "$(zoxide init bash)"
-
-
 export LC_MESSAGES=en_US.UTF-8
 export LANGUAGE=en_US
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
+export BASH_SILENCE_DEPRECATION_WARNING=1
+export VISUAL=nvim
+export EDITOR=nvim
+
+
+
+export PATH=/opt/homebrew/bin/:$PATH
+export PATH=$HOME/.config/tmux/plugins/t-smart-tmux-session-manager/bin:$PATH
+
+eval "$(zoxide init bash)"
