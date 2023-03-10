@@ -1,11 +1,8 @@
-require 'plugins'
-require 'settings'
-require 'mappings'
-require 'lsp'
+require('plugins')
+require('configs.mappings')
+require('configs.settings')
 
--- Colorscheme
-vim.cmd('colorscheme nord')
-
-
--- Tex
--- vim.cmd('source tex.vim')
+require('configs.nvim-treesitter')
+require('configs.nord')
+require('configs.gitsigns')
+require('configs.lualine')
