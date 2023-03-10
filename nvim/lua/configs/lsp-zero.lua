@@ -1,8 +1,21 @@
 local lsp = require('lsp-zero').preset({
-  name = 'recommended',
-  set_lsp_keymaps = true,
-  manage_nvim_cmp = true,
   suggest_lsp_servers = false,
+  setup_servers_on_start = true,
+  set_lsp_keymaps = true,
+  configure_diagnostics = true,
+  cmp_capabilities = true,
+  manage_nvim_cmp = true,
+  call_servers = 'local',
+  sign_icons = {
+    -- error = '✘',
+    error = '',
+    -- warn = '▲',
+    warn = '',
+    -- hint = '⚑',
+    hint = '',
+    -- info = ''
+    info = ''
+  }
 })
 
 -- (Optional) Configure lua language server for neovim
