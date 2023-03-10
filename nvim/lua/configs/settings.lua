@@ -22,3 +22,4 @@ vim.opt.scrolloff = 8
 vim.opt.cursorline = false
 vim.opt.guicursor = ""
 vim.opt.laststatus = 0
+vim.opt.termguicolors = true
