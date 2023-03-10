@@ -27,16 +27,22 @@ cmp.setup( {
 })
 
 local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
-local lsp_attach = function(_, _) -- https://github.com/VonHeikemen/lsp-zero.nvim/blob/v1.x/doc/md/lsp.md#you-might-not-need-lsp-zero
+local lsp_attach = function(_, bufnr) -- https://github.com/VonHeikemen/lsp-zero.nvim/blob/v1.x/doc/md/lsp.md#you-might-not-need-lsp-zero
   -- Create your keybindings here...
-  vim.keymap.set('n', 'gd',    vim.lsp.buf.definition)
-  vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help)
-  vim.keymap.set('n', '<C->', vim.lsp.buf.completion)
+  vim.keymap.set('n', 'gd',    vim.lsp.buf.definition,      {buffer=bufnr})
+  vim.keymap.set('n', 'gD',    vim.lsp.buf.declaration,     {buffer=bufnr})
+  vim.keymap.set('n', 'gr',    vim.lsp.buf.references,      {buffer=bufnr})
+  vim.keymap.set('n', 'gt',    vim.lsp.buf.type_definition, {buffer=bufnr})
+  vim.keymap.set('n', '<C-k>', vim.lsp.buf.hover,           {buffer=bufnr})
+  vim.keymap.set('n', '<F2>',  vim.lsp.buf.rename,          {buffer=bufnr})
+  vim.keymap.set('n', 'gp',    vim.diagnostic.goto_prev,    {buffer=bufnr})
+
+  vim.keymap.set('n', 'gn',    vim.diagnostic.goto_next,    {buffer=bufnr})
+  vim.keymap.set('n', 'gl',    vim.diagnostic.open_float,   {buffer=bufnr})
 end
 
 local lspconfig = require('lspconfig')
 local get_servers = require('mason-lspconfig').get_installed_servers
-
 for _, server_name in ipairs(get_servers()) do
   lspconfig[server_name].setup({
     on_attach = lsp_attach,
@@ -48,23 +54,31 @@ for _, server_name in ipairs(get_servers()) do
     }
   })
 end
+
 vim.diagnostic.config({
   virtual_text = true,
   signs = true,
   update_in_insert = true,
   underline = true,
   severity_sort = true,
-  float = true,
+  float = {
+    focusable = true,
+    style = 'minimal',
+    border = 'rounded',
+    source = 'always',
+    header = '',
+    prefix = '',
+  }
 })
 
 local signs = {
     Error = " ",
-    Warning = " ",
+    Warn = " ",
     Hint = " ",
-    Information = " "
+    Info = " "
 }
-
 for type, icon in pairs(signs) do
     local hl = "DiagnosticSign" .. type
     vim.fn.sign_define(hl, {text = icon, texthl = hl, numhl = hl})
 end
+
