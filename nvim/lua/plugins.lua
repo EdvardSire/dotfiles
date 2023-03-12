@@ -64,4 +64,7 @@ return require("packer").startup(function(use)
 	use({
 		"sbdchd/neoformat",
 	})
+  use({
+    'windwp/nvim-ts-autotag',
+  })
 end)
