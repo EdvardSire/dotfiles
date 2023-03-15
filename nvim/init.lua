@@ -1,13 +1,13 @@
-require('plugins')
-require('configs.mappings')
-require('configs.settings')
+require("plugins")
+require("configs.mappings")
+require("configs.settings")
 
-require('configs.nvim-treesitter')
-require('configs.nord')
-require('configs.gitsigns')
-require('configs.lualine')
-require('configs.custom-lsp')
+require("configs.nvim-treesitter")
+require("configs.nord")
+require("configs.gitsigns")
+require("configs.lualine")
+require("configs.custom-lsp")
+require("configs.telescope")
 
 -- require('configs.formatter')
 -- require('configs.lsp-zero')
-
