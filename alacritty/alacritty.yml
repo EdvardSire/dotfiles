@@ -10,7 +10,6 @@ window:
     y: 5
   opacity: 0.98
 
-
 font:
   normal:
     family: "SFMono Nerd Font"
@@ -19,9 +18,9 @@ font:
 
 key_bindings:
   # - { key: Q, mods: Command, chars: "\x02\x60\x0a"}
-  - { key: T,  mods: Command, chars: "\x02\x63"}
-  - { key: G,  mods: Command, chars: "\x02\x67"}
-  - { key: I,  mods: Command, chars: "\x02\x70"}
-  - { key: O,  mods: Command, chars: "\x02\x6e"}
-  - { key: L,  mods: Command, chars: "\u0002\u0054"}
-
+  - { key: T, mods: Command, chars: "\x02\x63" }
+  - { key: G, mods: Command, chars: "\x02\x67" }
+  - { key: I, mods: Command, chars: "\x02\x70" }
+  - { key: O, mods: Command, chars: "\x02\x6e" }
+  - { key: L, mods: Command, chars: "\u0002\u0054" }
+  - { key: U, mods: Command, chars: "\u0002\u0071" }
