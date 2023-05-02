@@ -1,24 +1,40 @@
 #!/bin/bash
 
-alias ls='ls --color=auto'
+### Color
 alias lsa='ls -a'
 alias ll='ls -l -a'
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
 
+
+### Sane defaults
 alias c='clear'
 alias e='exit'
 
+### Program shortcuts
 alias z='zoxide'
 alias lg='lazygit'
 alias vi='nvim'
 
-alias gs='git status'
-alias ga='git add'
-alias gr='git rm' 
-alias gc='git commit'
-alias gb='git branch -vv'
-alias gr='git remote -vv'
-alias gl='git log --graph --all'
-alias gd='git diff'
-alias gr='git restore'
+### NTNU
+alias vpn='sudo openconnect vpn.ntnu.no'
 
-alias bs='brew services'
+### Exa
+if [ -x $(which exa) ]; then
+  alias ls='exa -l --color=always --group-directories-first'  # list non dotfiles
+  alias ll='exa -al --color=always --group-directories-first' # list all
+  alias lc='exa -a --color=always --group-directories-first'  # list compact
+  alias lt='exa -aT --color=always --group-directories-first' # tree listing
+  function getdotfiles() { exa -al --color=always --group-directories-first | awk '$NF ~ /^\./';}
+  alias l.='getdotfiles'
+fi
+
+if [ "$(uname -s)" == "Linux" ]; then
+  alias code='code -enable-features=UseOzonePlatform -ozone-platform=wayland'
+  alias esway='nvim ~/.config/sway/config'
+fi
+
+if [ "$(uname -s)" == "Darwin" ]; then
+  alias bs='brew services'
+fi
+
