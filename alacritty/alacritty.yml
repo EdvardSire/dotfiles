@@ -4,7 +4,7 @@ import:
   - ~/.config/alacritty/new_nord.yml
 
 window:
-  decorations: buttonless
+  decorations: none
   padding:
     x: 5
     y: 5
@@ -12,9 +12,10 @@ window:
 
 font:
   normal:
-    family: "SFMono Nerd Font"
+    family: "FiraCode"
     style: Light
-  size: 15
+
+  size: 11
 
 key_bindings:
   # - { key: Q, mods: Command, chars: "\x02\x60\x0a"}
