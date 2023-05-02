@@ -1,35 +1,39 @@
 #!/bin/bash
 
-# append to the history file, don't overwrite it
-shopt -s histappend
-
-# Alias definitions.
-source ~/.config/bash/bash_aliases
-
-
+### Prompt
 git_prompt() {
     #https://www.youtube.com/watch?v=-gYtV9z7hhw
     local branch="$(git symbolic-ref HEAD 2> /dev/null | cut -d'/' -f3)"
-    [ -n "${branch}" ] && echo "(שׂ ${branch}) "
+    [ -n "${branch}" ] && echo "(${branch})"
 }
-
-
 #PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-PS1='\[\033[01;32m\]\u@\h\[\033[00m\] \[\033[01;34m\]\w\[\033[00m\] \n $(git_prompt)~ '
+PS1='\[\033[01;32m\]\u@\h\[\033[00m\] \[\033[01;34m\]\w\[\033[00m\] \n $(git_prompt) '
 # PS1='\[\033[01;34m\]\w\[\033[00m\] $(git_prompt)'
 
+
+### Alias definitions.
+source ~/.config/bash/aliasesrc
+
+### Editor
+export VISUAL=nvim
+export EDITOR=nvim
+
+### Hisotry
+shopt -s histappend # Append to the history file, don't overwrite it
+export HISTFILESIZE=
+export HISTSIZE=5000
+
+## Other
+export BASH_SILENCE_DEPRECATION_WARNING=1
 export LC_MESSAGES=en_US.UTF-8
 export LANGUAGE=en_US
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
-export BASH_SILENCE_DEPRECATION_WARNING=1
-export VISUAL=nvim
-export EDITOR=nvim
 
-
-
-export PATH=/opt/homebrew/bin/:$PATH
-export PATH=$HOME/.config/tmux/plugins/t-smart-tmux-session-manager/bin:$PATH
-
-eval "$(zoxide init bash)"
+### Mac specifics
+if [ "$(uname -s)" == "Darwin" ]; then
+  export PATH=/opt/homebrew/bin/:$PATH
+  export PATH=$HOME/.config/tmux/plugins/t-smart-tmux-session-manager/bin:$PATH
+  eval "$(zoxide init bash)"
+fi

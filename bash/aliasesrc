@@ -29,6 +29,11 @@ if [ -x $(which exa) ]; then
   alias l.='getdotfiles'
 fi
 
+### Signing
+if [ -x $(which gpg) ]; then
+  export GPG_TTY=$(tty)
+fi
+
 if [ "$(uname -s)" == "Linux" ]; then
   alias code='code -enable-features=UseOzonePlatform -ozone-platform=wayland'
   alias esway='nvim ~/.config/sway/config'
