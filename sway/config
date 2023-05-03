@@ -1,6 +1,25 @@
 default_border pixel
 default_floating_border pixel
 
+# Window borders 
+#hide_edge_borders smart 
+
+# Set colors
+set $bg #323232
+set $fg #eff1f5
+set $br #ffffff
+set $br #000000
+set $ia #232425
+
+
+# class                 border  backgr. text    indicator child_border
+client.focused          $br     $br     $fg     $bg       $br
+client.focused_inactive $bg     $bg     $fg     $bg       $bg
+client.unfocused        $bg     $bg     $fg     $bg       $bg
+#client.urgent          $br     $br     $fg     $bg       $br #currently not implemented
+#client.placeholder     $br     $br     $fg     $bg       $br #currently not implemented
+client.background $bg
+
 output * scale 1.4
 
 # Sound
@@ -10,8 +29,8 @@ bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ 
 #bindsym --locked XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
 # Brightness
-bindsym --locked XF86MonBrightnessUp exec brightnessctl s +20
-bindsym --locked XF86MonBrightnessDown exec brightnessctl s 20-
+bindsym --locked XF86MonBrightnessUp exec brightnessctl s +15
+bindsym --locked XF86MonBrightnessDown exec brightnessctl s 15-
 
 
 set $mod Mod4
@@ -23,9 +42,17 @@ set $term alacritty
 set $menu dmenu_run
 
 input "1452:834:Apple_Internal_Keyboard_/_Trackpad" {
+  ### Trackpad 
   natural_scroll enabled
   tap disabled
   scroll_factor 0.6
+  pointer_accel 0.2
+
+  ### Keyboard
+  xkb_layout us,no
+  repeat_delay 300
+  repeat_rate 65
+  xkb_options grp:alt_shift_toggle
 }
 
 ### Key bindings
