@@ -51,7 +51,7 @@ input "1452:834:Apple_Internal_Keyboard_/_Trackpad" {
   ### Keyboard
   xkb_layout us,no
   repeat_delay 300
-  repeat_rate 65
+  repeat_rate 55
   xkb_options grp:alt_shift_toggle
 }
 
