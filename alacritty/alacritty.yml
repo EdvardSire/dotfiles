@@ -12,10 +12,13 @@ window:
 
 font:
   normal:
-    family: "FiraCode"
+    family: "FiraCodeNerdFont"
     style: Light
 
   size: 11
+
+env:
+  TERM: xterm-256color
 
 key_bindings:
   # - { key: Q, mods: Command, chars: "\x02\x60\x0a"}
