@@ -37,3 +37,7 @@ if [ "$(uname -s)" == "Darwin" ]; then
   export PATH=$HOME/.config/tmux/plugins/t-smart-tmux-session-manager/bin:$PATH
   eval "$(zoxide init bash)"
 fi
+
+if [[ "$(command -v zoxide)" =~ [.*/bin/zoxide] ]]; then
+  eval "$(zoxide init bash)"
+fi
