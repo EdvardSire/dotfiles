@@ -14,12 +14,13 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     cd ~/.config
     if [ -d "$local_directory_name" ]; then
       read -p "Do you want to copy ${local_directory_name} [y]?" -n 1 -r -s
+      echo
       if [[ $REPLY =~ ^[Yy]$ ]]; then
         # ln -s "$source_repo_path/$local_directory_name" .
-        echo
         echo i dont do anything
       fi
     fi
   done
 fi
 
+echo "source ~/.config/bash/bashrc" >> ~/.bashrc
