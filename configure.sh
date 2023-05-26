@@ -16,6 +16,8 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
       read -p "Do you want to copy ${local_directory_name} [y]?" -n 1 -r -s
       if [[ $REPLY =~ ^[Yy]$ ]]; then
         # ln -s "$source_repo_path/$local_directory_name" .
+        echo
+        echo i dont do anything
       fi
     fi
   done
