@@ -2,4 +2,4 @@
 	email = edvardsire@protonmail.com
 	name = EdvardSire
 [commit]
-	gpgsign = true
+	gpgsign = false
