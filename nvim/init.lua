@@ -9,5 +9,8 @@ require("configs.lualine")
 require("configs.custom-lsp")
 require("configs.telescope")
 
--- require('configs.formatter')
 -- require('configs.lsp-zero')
+
+
+vim.cmd('highlight Normal guibg=none')
+vim.cmd('highlight SignColumn guibg=none')
