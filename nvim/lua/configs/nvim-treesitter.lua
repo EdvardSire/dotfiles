@@ -4,7 +4,7 @@ require("nvim-treesitter.configs").setup({
 		"c",
 		"lua",
 		"vim",
-		"help",
+		-- "help",
 		"query",
 		"cpp",
 		"html",
