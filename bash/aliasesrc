@@ -20,7 +20,7 @@ alias vi='nvim'
 alias vpn='sudo openconnect vpn.ntnu.no'
 
 ### Exa
-if [ -x $(which exa) ]; then
+if [[ -x $(which exa) ]]; then
   alias ls='exa -l --color=always --group-directories-first'  # list non dotfiles
   alias ll='exa -al --color=always --group-directories-first' # list all
   alias lc='exa -a --color=always --group-directories-first'  # list compact
