@@ -41,3 +41,5 @@ fi
 if [[ "$(command -v zoxide)" =~ [.*/bin/zoxide] ]]; then
   eval "$(zoxide init bash)"
 fi
+
+eval "$(ssh-agent -s)"
