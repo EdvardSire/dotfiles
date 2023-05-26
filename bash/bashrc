@@ -1,22 +1,18 @@
 #!/bin/bash
 
-### Prompt
 git_prompt() {
-    #https://www.youtube.com/watch?v=-gYtV9z7hhw
     local branch="$(git symbolic-ref HEAD 2> /dev/null | cut -d'/' -f3)"
     [ -n "${branch}" ] && echo "(${branch})"
 }
-#PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-PS1='\[\033[01;32m\]\u@\h\[\033[00m\] \[\033[01;34m\]\w\[\033[00m\] \n $(git_prompt) '
-# PS1='\[\033[01;34m\]\w\[\033[00m\] $(git_prompt)'
 
+PS1='\[\033[01;32m\]\u@\h\[\033[00m\] \[\033[01;34m\]\w\[\033[00m\] \n $(git_prompt) '
 
 ### Alias definitions.
 source ~/.config/bash/aliasesrc
 
 ### Editor
-export VISUAL=nvim
-export EDITOR=nvim
+export VISUAL=vim
+export EDITOR=vim
 
 ### Hisotry
 shopt -s histappend # Append to the history file, don't overwrite it
@@ -38,7 +34,12 @@ if [ "$(uname -s)" == "Darwin" ]; then
   eval "$(zoxide init bash)"
 fi
 
+### Better cd
 if [[ "$(command -v zoxide)" =~ [.*/bin/zoxide$] ]]; then
   eval "$(zoxide init bash)"
 fi
 
+### Signing
+if [ -x $(which gpg) ]; then
+  export GPG_TTY=$(tty)
+fi

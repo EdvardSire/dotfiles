@@ -10,16 +10,19 @@ alias grep='grep --color=auto'
 ### Sane defaults
 alias c='clear'
 alias e='exit'
+alias q='exit'
 
 ### Program shortcuts
 alias z='zoxide'
 alias lg='lazygit'
 alias vi='nvim'
 
-### NTNU
-alias vpn='sudo openconnect vpn.ntnu.no'
+### VPN
+if [[ -x $(which openconnect) ]]; then
+  alias vpn='sudo openconnect vpn.ntnu.no'
+fi 
 
-### Exa
+### Better ls
 if [[ -x $(which exa) ]]; then
   alias ls='exa -l --color=always --group-directories-first'  # list non dotfiles
   alias ll='exa -al --color=always --group-directories-first' # list all
@@ -29,14 +32,8 @@ if [[ -x $(which exa) ]]; then
   alias l.='getdotfiles'
 fi
 
-### Signing
-if [ -x $(which gpg) ]; then
-  export GPG_TTY=$(tty)
-fi
-
 if [ "$(uname -s)" == "Linux" ]; then
   alias code='code -enable-features=UseOzonePlatform -ozone-platform=wayland'
-  alias esway='nvim ~/.config/sway/config'
 fi
 
 if [ "$(uname -s)" == "Darwin" ]; then
