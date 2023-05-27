@@ -23,10 +23,10 @@ return require("packer").startup(function(use)
 			require("Comment").setup()
 		end,
 	})
-	use({
-		"ThePrimeagen/harpoon",
-		requires = { { "nvim-lua/plenary.nvim" } },
-	})
+	-- use({
+	-- 	"ThePrimeagen/harpoon",
+	-- 	requires = { { "nvim-lua/plenary.nvim" } },
+	-- })
 	use({
 		"mbbill/undotree",
 	})

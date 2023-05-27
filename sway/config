@@ -1,8 +1,26 @@
-default_border pixel
-default_floating_border pixel
+# default_border pixel
+default_border none
+# default_floating_border pixel
+default_floating_border none
+
+
+seat * hide_cursor 2000
+seat * hide_cursor when-typing enable
+
+
+# output "*" bg ~/Downloads/bright.jpg fill
+# output "*" bg ~/Downloads/matterhorn.jpg fill
+output "*" bg ~/Downloads/light.jpg fill
+# output "*" bg ~/Downloads/dark.jpg fill
+
+for_window [title="Animation Window"] floating enable
 
 # Window borders 
 #hide_edge_borders smart 
+
+# font pango:monospace  11
+font pango:freemono  11
+# font pango:FiraCodeNerdFont-Retina  11
 
 # Set colors
 set $bg #323232
@@ -45,7 +63,7 @@ input "1452:834:Apple_Internal_Keyboard_/_Trackpad" {
   ### Trackpad 
   natural_scroll enabled
   tap disabled
-  scroll_factor 0.6
+  scroll_factor 0.5
   pointer_accel 0.2
 
   ### Keyboard
@@ -197,18 +215,21 @@ bindsym $mod+r mode "resize"
 #
 # Read `man 5 sway-bar` for more information about this section.
 bar {
-    position top
+    position bottom
+    mode hide
+    gaps 0
 
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
     #status_command while date +'%Y-%m-%d %I:%M:%S %p'; do sleep 1; done
     #status_command while date +"%Y-%m-%e %A, Week %V %H:%M:%S"; do sleep 1; done
-    status_command while ~/bin/statusbar.sh; do sleep 1; done
+    status_command while ~/bin/statusbar.sh; do sleep 0.2; done
 
     colors {
         statusline #ffffff
+        # background #323232 inactive_workspace #32323200 #32323200 #5c5c5c
         background #323232
-        inactive_workspace #32323200 #32323200 #5c5c5c
+        
     }
 }
 
