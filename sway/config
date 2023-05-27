@@ -63,7 +63,7 @@ input "1452:834:Apple_Internal_Keyboard_/_Trackpad" {
   ### Trackpad 
   natural_scroll enabled
   tap disabled
-  scroll_factor 0.6
+  scroll_factor 0.5
   pointer_accel 0.2
 
   ### Keyboard
