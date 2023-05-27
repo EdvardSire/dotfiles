@@ -15,7 +15,7 @@ font:
     family: "FiraCodeNerdFont"
     style: Light
 
-  size: 11
+  size: 14
 
 env:
   TERM: xterm-256color
