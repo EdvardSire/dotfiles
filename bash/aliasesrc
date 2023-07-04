@@ -7,7 +7,7 @@ alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 
 ### Git
-alias g-conflicts='git diff --name-only --diff-filter=U'
+alias g-conflicts='git diff --name-only --diff-filter=U --relative'
 
 ### Sane defaults
 alias c='clear'
