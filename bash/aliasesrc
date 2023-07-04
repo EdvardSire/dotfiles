@@ -6,6 +6,8 @@ alias ll='ls -l -a'
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 
+### Git
+alias g-conflicts='git diff --name-only --diff-filter=U'
 
 ### Sane defaults
 alias c='clear'

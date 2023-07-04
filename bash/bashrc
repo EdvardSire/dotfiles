@@ -1,5 +1,7 @@
 #!/bin/bash
 
+
+alias ls=sl
 git_prompt() {
     local branch="$(git symbolic-ref HEAD 2> /dev/null | cut -d'/' -f3)"
     [ -n "${branch}" ] && echo "(${branch})"
@@ -36,7 +38,6 @@ fi
 
 ### TODO: add check
 export PATH=$HOME/.config/tmux/plugins/t-smart-tmux-session-manager/bin:$PATH
-
 ### Better cd
 if [[ "$(command -v zoxide)" =~ [.*/bin/zoxide$] ]]; then
   eval "$(zoxide init bash)"
