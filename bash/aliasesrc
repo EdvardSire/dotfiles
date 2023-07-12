@@ -8,6 +8,8 @@ alias grep='grep --color=auto'
 
 ### Git
 alias g-conflicts='git diff --name-only --diff-filter=U --relative'
+alias g-count='git rev-list --left-right --count master...'
+alias g-show-commits='git rev-list --left-right --pretty=oneline master...'
 
 ### Sane defaults
 alias c='clear'
