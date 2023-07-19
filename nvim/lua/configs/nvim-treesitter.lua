@@ -4,6 +4,7 @@ require("nvim-treesitter.configs").setup({
 		"c",
 		"lua",
 		"vim",
+		"go",
 		-- "help",
 		"query",
 		"cpp",
@@ -52,7 +53,7 @@ require("nvim-treesitter.configs").setup({
 		-- Instead of true it can also be a list of languages
 		additional_vim_regex_highlighting = false,
 	},
-  -- Autotag
+	-- Autotag
 	autotag = {
 		enable = true,
 	},
