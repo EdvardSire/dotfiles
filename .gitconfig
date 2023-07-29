@@ -3,3 +3,5 @@
 	name = Edvard Sire
 [commit]
 	gpgsign = false
+[diff]
+  tool = vimdiff
