@@ -1,7 +1,17 @@
 [user]
 	email = edvardsire@protonmail.com
 	name = Edvard Sire
+
 [commit]
 	gpgsign = false
+
 [diff]
   tool = vimdiff
+
+[alias]
+  aliases = "!git config --global -l | grep ^alias | sed s/alias.// | sort"
+  conflicts = diff --name-only --diff-filter=U --relative
+  count = rev-list --left-right --count master...
+  show-commits = rev-list --left-right --pretty=oneline master...
+  tracked = ls-tree --name-only -r HEAD
+
