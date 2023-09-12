@@ -6,25 +6,32 @@ alias ll='ls -l -a'
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 
+### Shorthands
+alias c='clear'
+alias e='exit'
+alias q='exit'
+
 ### Git
 alias g-conflicts='git diff --name-only --diff-filter=U --relative'
 alias g-count='git rev-list --left-right --count master...'
 alias g-show-commits='git rev-list --left-right --pretty=oneline master...'
 alias g-tree='git ls-tree --name-only -r HEAD'
 
-### Sane defaults
-alias c='clear'
-alias e='exit'
-alias q='exit'
-
 ### Program shortcuts
-alias z='zoxide'
-alias lg='lazygit'
-alias vi='nvim'
-
-### VPN
+if [[ -x $(which lazygit) ]]; then
+  alias lg='lazygit'
+fi 
+if [[ -x $(which zoxide) ]]; then
+  alias z='zoxide'
+fi 
 if [[ -x $(which openconnect) ]]; then
   alias vpn='sudo openconnect vpn.ntnu.no'
+fi 
+if [[ -x $(which nvim) ]]; then
+  alias vi='nvim'
+fi 
+if [[ -x $(which nnn) ]]; then
+  alias n='nnn -de'
 fi 
 
 ### Better ls
@@ -34,9 +41,9 @@ if [[ -x $(which exa) ]]; then
   alias lc='exa -a --color=always --group-directories-first'  # list compact
   alias lt='exa -aT --color=always --group-directories-first' # tree listing
   function getdotfiles() { exa -al --color=always --group-directories-first | awk '$NF ~ /^\./';}
-  alias l.='getdotfiles'
 fi
 
+### Platform specific
 if [ "$(uname -s)" == "Linux" ]; then
   alias code='code -enable-features=UseOzonePlatform -ozone-platform=wayland'
 fi
