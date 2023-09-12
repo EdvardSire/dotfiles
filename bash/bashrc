@@ -16,8 +16,8 @@ PS1='\[\033[01;32m\]\u@\h\[\033[00m\] \[\033[01;34m\]\w\[\033[00m\] \n $(git_pro
 source ~/.config/bash/aliasesrc
 
 ### Editor
-export VISUAL=vim
-export EDITOR=vim
+export VISUAL=nvim
+export EDITOR=nvim
 
 ### Hisotry
 shopt -s histappend # Append to the history file, don't overwrite it
