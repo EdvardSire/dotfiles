@@ -15,3 +15,5 @@
   show-commits = rev-list --left-right --pretty=oneline master...
   tracked = ls-tree --name-only -r HEAD
 
+[init]
+	defaultBranch = main
