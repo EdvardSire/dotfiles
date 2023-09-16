@@ -41,6 +41,8 @@ fi
 
 ### TODO: add check
 export PATH=$HOME/.config/tmux/plugins/t-smart-tmux-session-manager/bin:$PATH
+export PATH=/Users/user/tooling/ripes-ntnu/Ripes.app/Contents/MacOS:$PATH
+
 ### Better cd
 if [[ "$(command -v zoxide)" =~ [.*/bin/zoxide$] ]]; then
   eval "$(zoxide init bash)"
