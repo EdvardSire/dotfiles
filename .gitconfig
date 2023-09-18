@@ -1,9 +1,10 @@
 [user]
 	email = edvardsire@protonmail.com
 	name = Edvard Sire
+	signingkey = F036E87ADEF9E738
 
 [commit]
-	gpgsign = false
+	gpgsign = true
 
 [diff]
   tool = vimdiff
