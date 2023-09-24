@@ -37,6 +37,13 @@ if [ "$(uname -s)" == "Darwin" ]; then
   export PATH=/opt/homebrew/bin/:$PATH
   eval "$(zoxide init bash)"
   ssh-add --apple-load-keychain
+  bash_completion_path="/opt/homebrew/etc/bash_completion.d"
+  for file in "$bash_completion_path"/*; do
+    if [ -f "$file" ]; then
+          #echo $file
+          . $file
+    fi
+  done
 fi
 
 ### TODO: add check
