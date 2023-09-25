@@ -50,5 +50,7 @@ fi
 
 if [ "$(uname -s)" == "Darwin" ]; then
   alias bs='brew services'
+  alias reset_yabai='yabai --restart-service'
+  alias reset_skhd='skhd --restart-service'
 fi
 
