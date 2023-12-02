@@ -1,7 +1,10 @@
 require("mason").setup()
 
 require("mason-lspconfig").setup({
-	ensure_installed = {},
+	ensure_installed = {
+    clangd
+
+  },
 })
 
 local cmp = require("cmp")
