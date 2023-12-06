@@ -1,0 +1,56 @@
+import = ["/home/ubuntu/.config/alacritty/new_nord.toml"]
+live_config_reload = true
+
+[mouse]
+hide_when_typing = true
+
+[env]
+TERM = "xterm-256color"
+
+[font]
+size = 12.5
+
+[font.normal]
+#family = "FiraCodeNerdFont"
+#style = "Light"
+
+[[keyboard.bindings]]
+chars = "\u0002c"
+key = "T"
+mods = "Super"
+
+[[keyboard.bindings]]
+chars = "\u0002g"
+key = "G"
+mods = "Super"
+
+[[keyboard.bindings]]
+chars = "\u0002p"
+key = "I"
+mods = "Super"
+
+[[keyboard.bindings]]
+chars = "\u0002n"
+key = "O"
+mods = "Super"
+
+[[keyboard.bindings]]
+chars = "\u0002T"
+key = "L"
+mods = "Super"
+
+[[keyboard.bindings]]
+chars = "\u0002q"
+key = "U"
+mods = "Super"
+
+[shell]
+program = "/bin/bash"
+
+[window]
+decorations = "none"
+opacity = 0.98
+
+[window.padding]
+x = 5
+y = 5
