@@ -73,12 +73,15 @@ return require("packer").startup(function(use)
 	use({
 		"lukas-reineke/indent-blankline.nvim",
 	})
-	use({
-		"iamcco/markdown-preview.nvim",
-		run = "cd app && npm install",
-		setup = function()
-			vim.g.mkdp_filetypes = { "markdown" }
-		end,
-		ft = { "markdown" },
-	})
+  use({
+      "iamcco/markdown-preview.nvim",
+  })
+  use ({
+    "romgrk/nvim-treesitter-context",
+    requires = { "nvim-treesitter/nvim-treesitter" }, -- nvim-treesitter-context depends on nvim-treesitter
+    config = function()
+       local ctx = require "treesitter-context"
+       ctx.setup {}
+    end,
+  })
 end)
