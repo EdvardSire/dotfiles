@@ -44,6 +44,11 @@ chars = "\u0002q"
 key = "U"
 mods = "Super"
 
+[[keyboard.bindings]]
+action = "SpawnNewInstance"
+key = "N"
+mods = "Control"
+
 [shell]
 program = "/bin/bash"
 
