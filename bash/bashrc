@@ -1,6 +1,6 @@
 #!/bin/bash
 
-
+PS1='\[\033[01;32m\]\u@\h\[\033[00m\] \[\033[01;34m\]\w\[\033[00m\] \n $(git_prompt) '
 git_prompt() {
     local branch="$(git symbolic-ref HEAD 2> /dev/null | cut -d'/' -f3)"
     local master_or_main="$(git branch 2> /dev/null | awk -F ' +' '! /\(no branch\)/ {print $2}' | grep -E "(master|main)")"
@@ -10,32 +10,46 @@ git_prompt() {
     [ -n "${branch}" ] && echo "(${branch} ${down}↓ ${up}↑)"
 }
 
-PS1='\[\033[01;32m\]\u@\h\[\033[00m\] \[\033[01;34m\]\w\[\033[00m\] \n $(git_prompt) '
-
-### Alias definitions.
-source ~/.config/bash/aliasesrc
-
-### Editor
+# Editor
 export VISUAL=nvim
 export EDITOR=nvim
 
-### Hisotry
+# Hisotry
 shopt -s histappend # Append to the history file, don't overwrite it
 export HISTFILESIZE=
 export HISTSIZE=5000
 
-## Other
-export BASH_SILENCE_DEPRECATION_WARNING=1
-export LC_MESSAGES=en_US.UTF-8
-export LANGUAGE=en_US
-export LANG=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
+## Local
+#export LC_MESSAGES=en_US.UTF-8
+#export LANGUAGE=en_US
+#export LANG=en_US.UTF-8
+#export LC_ALL=en_US.UTF-8
 
 
-### Mac specifics
+# Platform
+## All
+alias lsa='ls -a'
+alias ll='ls -l -a'
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+
+alias c='clear'
+alias e='exit'
+alias q='exit'
+
+alias g-conflicts='git diff --name-only --diff-filter=U --relative'
+alias g-count='git rev-list --left-right --count master...'
+alias g-show-commits='git rev-list --left-right --pretty=oneline master...'
+alias g-tree='git ls-tree --name-only -r HEAD'
+
+## Mac
 if [ "$(uname -s)" == "Darwin" ]; then
+  alias bs='brew services'
+  alias reset_yabai='yabai --restart-service'
+  alias reset_skhd='skhd --restart-service'
+
+  export BASH_SILENCE_DEPRECATION_WARNING=1
   export PATH=/opt/homebrew/bin/:$PATH
-  eval "$(zoxide init bash)"
   ssh-add --apple-load-keychain
   bash_completion_path="/opt/homebrew/etc/bash_completion.d"
   for file in "$bash_completion_path"/*; do
@@ -46,16 +60,51 @@ if [ "$(uname -s)" == "Darwin" ]; then
   done
 fi
 
-### TODO: add check
-export PATH=$HOME/.config/tmux/plugins/t-smart-tmux-session-manager/bin:$PATH
-export PATH=/Users/user/tooling/ripes-ntnu/Ripes.app/Contents/MacOS:$PATH
-
-### Better cd
-if [[ "$(command -v zoxide)" =~ [.*/bin/zoxide$] ]]; then
-  eval "$(zoxide init bash)"
+## Linux
+if [ "$(uname -s)" == "Linux" ]; then
+  alias code='code -enable-features=UseOzonePlatform -ozone-platform=wayland'
 fi
 
-### Signing
+
+
+# Program setup
+if [ -x $(which zoxide) ]; then
+  eval "$(zoxide init bash)"
+  alias z='zoxide'
+fi
+
+if [ -x $(which pandoc) ]; then
+  eval "$(pandoc --bash-completion)"
+fi
+
 if [ -x $(which gpg) ]; then
   export GPG_TTY=$(tty)
 fi
+
+if [[ -x $(which lazygit) ]]; then
+  alias lg='lazygit'
+fi 
+
+if [[ -x $(which openconnect) ]]; then
+  alias vpn='sudo openconnect vpn.ntnu.no'
+fi 
+
+if [[ -x $(which nvim) ]]; then
+  alias vi='nvim'
+fi 
+
+if [[ -x $(which nnn) ]]; then
+  alias n='nnn -de'
+fi 
+
+if [[ -x $(which exa) ]]; then
+  alias ls='exa -l --color=always --group-directories-first'  # list non dotfiles
+  alias ll='exa -al --color=always --group-directories-first' # list all
+  alias lc='exa -a --color=always --group-directories-first'  # list compact
+  alias lt='exa -aT --color=always --group-directories-first' # tree listing
+  function getdotfiles() { exa -al --color=always --group-directories-first | awk '$NF ~ /^\./';}
+fi
+
+if [ -x $(which t) ]; then
+  export PATH=$HOME/.config/tmux/plugins/t-smart-tmux-session-manager/bin:$PATH
+fi 
