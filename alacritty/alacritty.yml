@@ -18,7 +18,7 @@ font:
   size: 14
 
 shell:
-  program: /opt/homebrew/bin//bash
+  program: /bin/bash
 
 
 env:
