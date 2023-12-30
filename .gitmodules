@@ -1,3 +1,9 @@
 [submodule "private"]
 	path = private
 	url = git@github.com:EdvardSire/private.git
+[submodule "dotfiles"]
+	path = dotfiles
+	url = git@github.com:EdvardSire/dotfiles.git
+[submodule "bin"]
+	path = bin
+	url = git@github.com:EdvardSire/bin.git
