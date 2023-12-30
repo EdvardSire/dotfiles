@@ -23,10 +23,6 @@ return require("packer").startup(function(use)
 			require("Comment").setup()
 		end,
 	})
-	-- use({
-	-- 	"ThePrimeagen/harpoon",
-	-- 	requires = { { "nvim-lua/plenary.nvim" } },
-	-- })
 	use({
 		"mbbill/undotree",
 	})
@@ -73,9 +69,6 @@ return require("packer").startup(function(use)
 	use({
 		"lukas-reineke/indent-blankline.nvim",
 	})
-  use({
-      "iamcco/markdown-preview.nvim",
-  })
   use ({
     "romgrk/nvim-treesitter-context",
     requires = { "nvim-treesitter/nvim-treesitter" }, -- nvim-treesitter-context depends on nvim-treesitter
@@ -84,4 +77,10 @@ return require("packer").startup(function(use)
        ctx.setup {}
     end,
   })
+  use({
+    "iamcco/markdown-preview.nvim",
+    run = function() vim.fn["mkdp#util#install"]() end,
+})
+
+use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install", setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
 end)
