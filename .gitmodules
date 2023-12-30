@@ -1,3 +1,6 @@
 [submodule "private"]
 	path = private
 	url = git@github.com:EdvardSire/private.git
+[submodule "bin"]
+	path = bin
+	url = git@github.com:EdvardSire/bin.git
