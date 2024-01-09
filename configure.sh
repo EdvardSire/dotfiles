@@ -20,11 +20,9 @@ if [[ $choice =~ ^[Yy]$ ]]; then
       echo
       if [[ $choice =~ ^[Yy]$ ]]; then
         # mv "$config_path$local_directory_name" "${config_path}old_$local_directory_name"
-        # ln -s "$source_repo_path$local_directory_name" "$config_path$local_directory_name"
-        echo i dont do anything
+        ln -s "$source_repo_path$local_directory_name" "$config_path$local_directory_name"
+        # echo i dont do anything
       fi
     fi
   done
 fi
-
-echo "source ~/.config/bash/bashrc" >> ~/.bashrc
