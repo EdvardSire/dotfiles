@@ -1,13 +1,10 @@
 [user]
-	email = edvardsire@protonmail.com
+	email = mail@edvardsire.com
 	name = Edvard Sire
-	signingkey = F036E87ADEF9E738
+	signingkey = 76A667AC7675A3E8
 
 [commit]
 	gpgsign = true
-
-[diff]
-  tool = vimdiff
 
 [alias]
   aliases = "!git config --global -l | grep ^alias | sed s/alias.// | sort"
