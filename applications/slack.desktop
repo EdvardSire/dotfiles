@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Slack
+Exec=sh -c "/home/ubuntu/tooling/Slacky-0.0.1-arm64.AppImage --ozone-platform=wayland --enable-features=WaylandWindowDecorations"
+Icon= /home/ubuntu/tooling/Slacky/images/icon.png
+Type=Application
+
+MimeType=x-scheme-handler/obsidian;text/html;
