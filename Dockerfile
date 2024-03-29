@@ -5,7 +5,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt update && apt install -y build-essential \
     git-core cmake unzip wget curl gettext sudo
 
-RUN mkdir ~/.local_build && cd ~/.local_build && \
+RUN mkdir -p ~/.local_build && cd ~/.local_build && \
     git clone https://github.com/neovim/neovim && \
     cd neovim && git checkout stable && \
     make CMAKE_BUILD_TYPE=RelWithDebInfo && \
@@ -15,5 +15,5 @@ RUN git clone --depth 1 https://github.com/wbthomason/packer.nvim \
     ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 
 RUN cd && git clone https://github.com/EdvardSire/dotfiles.git && \
-    mkdir ~/.config && \
+    mkdir -p ~/.config && \
     ln -s ~/dotfiles/nvim ~/.config/nvim
