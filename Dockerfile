@@ -2,10 +2,8 @@ FROM ubuntu:focal
 ENV DEBIAN_FRONTEND=noninteractive
 # LET THERE BE 3 LINES HERE
 
-RUN apt update && apt install -y sudo
-
 RUN sudo apt update && apt install -y build-essential \
-    git-core cmake unzip wget curl gettext
+    git-core cmake unzip wget curl gettext sudo
 
 RUN mkdir ~/.local_build && cd ~/.local_build && \
     git clone https://github.com/neovim/neovim && \
