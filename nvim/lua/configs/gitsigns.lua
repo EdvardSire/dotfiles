@@ -1,24 +1,18 @@
 require('gitsigns').setup {
   signs = {
-    -- add          = { text = '│' },
-    -- change       = { text = '│' },
-    -- delete       = { text = '_' },
-    -- topdelete    = { text = '‾' },
-    -- changedelete = { text = '~' },
-    -- untracked    = { text = '┆' },
-    add = { text = "" },
-    change = { text = "" },
-    delete = { text = "" },
-    topdelete = { text = "" },
-    changedelete = { text = "" },
-    untracked = { text = "" },
+    add          = { text = '│' },
+    change       = { text = '│' },
+    delete       = { text = '_' },
+    topdelete    = { text = '‾' },
+    changedelete = { text = '~' },
+    untracked    = { text = '┆' },
   },
   signcolumn = false,  -- Toggle with `:Gitsigns toggle_signs`
   numhl      = true, -- Toggle with `:Gitsigns toggle_numhl`
   linehl     = false, -- Toggle with `:Gitsigns toggle_linehl`
   word_diff  = false, -- Toggle with `:Gitsigns toggle_word_diff`
   watch_gitdir = {
-    interval = 1000,
+    interval = 100,
     follow_files = true
   },
   attach_to_untracked = true,
@@ -29,7 +23,7 @@ require('gitsigns').setup {
     delay = 10,
     ignore_whitespace = false,
   },
-  current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d> - <summary>',
+  current_line_blame_formatter = '<author>;<author_time:%Y-%m-%d>;<summary>',
   sign_priority = 0,
   update_debounce = 100,
   status_formatter = nil, -- Use default

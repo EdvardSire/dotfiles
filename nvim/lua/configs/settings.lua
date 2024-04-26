@@ -24,5 +24,3 @@ vim.opt.guicursor = ''
 vim.opt.laststatus = 0
 vim.opt.termguicolors = true
 vim.cmd('set cursorline cursorlineopt=number')
-
-vim.cmd [[autocmd BufWritePre * Neoformat]]

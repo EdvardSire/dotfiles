@@ -16,10 +16,10 @@ vim.diagnostic.config({
 })
 
 local signs = {
-	Error = " ",
-	Warn = " ",
-	Hint = " ",
-	Info = " ",
+	Error = "",
+	Warn = "",
+	Hint = "",
+	Info = "",
 }
 for type, icon in pairs(signs) do
 	local hl = "DiagnosticSign" .. type
@@ -52,13 +52,6 @@ cmp.setup({
 		{ name = "nvim_lsp_signature_help" },
 	}),
 })
-
-
-
--- LSP keybindings
-vim.keymap.set("n", "gl", vim.diagnostic.open_float)
-vim.keymap.set("n", "gp", vim.diagnostic.goto_prev)
-vim.keymap.set("n", "gn", vim.diagnostic.goto_next)
 
 local lsp_attach = function(_, bufnr)
 	vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = bufnr })

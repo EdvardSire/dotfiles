@@ -7,19 +7,19 @@ local lsp = require('lsp-zero').preset({
   manage_nvim_cmp = false,
   call_servers = 'local',
   sign_icons = {
-    -- error = '✘',
-    error = '',
-    -- warn = '▲',
-    warn = '',
-    -- hint = '⚑',
-    hint = '',
-    -- info = ''
-    info = ''
+    error = '✘',
+    -- error = '',
+    warn = '▲',
+    -- warn = '',
+    hint = '⚑',
+    -- hint = '',
+    info = ''
+    -- info = ''
   }
 })
 
 -- (Optional) Configure lua language server for neovim
-lsp.nvim_workspace()
+-- lsp.nvim_workspace()
 
 lsp.setup()
 
