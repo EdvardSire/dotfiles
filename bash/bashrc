@@ -10,10 +10,6 @@ git_prompt() {
     [ -n "${branch}" ] && echo "(${branch} ${down}↓ ${up}↑)"
 }
 
-# Editor
-export VISUAL=nvim
-export EDITOR=nvim
-
 # Hisotry
 shopt -s histappend # Append to the history file, don't overwrite it
 export HISTFILESIZE=
@@ -60,22 +56,7 @@ if [ "$(uname -s)" == "Darwin" ]; then
   done
 fi
 
-## Linux
-if [ "$(uname -s)" == "Linux" ]; then
-  alias code='code -enable-features=UseOzonePlatform -ozone-platform=wayland'
-fi
 
-
-
-# Program setup
-if [ -x $(which zoxide) ]; then
-  eval "$(zoxide init bash)"
-  alias z='zoxide'
-fi
-
-if [ -x $(which pandoc) ]; then
-  eval "$(pandoc --bash-completion)"
-fi
 
 if [ -x $(which gpg) ]; then
   export GPG_TTY=$(tty)
@@ -91,20 +72,13 @@ fi
 
 if [[ -x $(which nvim) ]]; then
   alias vi='nvim'
+  export VISUAL=nvim
+  export EDITOR=nvim
 fi 
-
-if [[ -x $(which nnn) ]]; then
-  alias n='nnn -de'
-fi 
-
-if [[ -x $(which exa) ]]; then
-  alias ls='exa -l --color=always --group-directories-first'  # list non dotfiles
-  alias ll='exa -al --color=always --group-directories-first' # list all
-  alias lc='exa -a --color=always --group-directories-first'  # list compact
-  alias lt='exa -aT --color=always --group-directories-first' # tree listing
-  function getdotfiles() { exa -al --color=always --group-directories-first | awk '$NF ~ /^\./';}
-fi
 
 if [ -x $(which t) ]; then
   export PATH=$HOME/.config/tmux/plugins/t-smart-tmux-session-manager/bin:$PATH
 fi 
+
+
+export PATH=$HOME/.local/bin:$PATH
