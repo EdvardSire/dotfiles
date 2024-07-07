@@ -33,11 +33,6 @@ alias c='clear'
 alias e='exit'
 alias q='exit'
 
-alias g-conflicts='git diff --name-only --diff-filter=U --relative'
-alias g-count='git rev-list --left-right --count master...'
-alias g-show-commits='git rev-list --left-right --pretty=oneline master...'
-alias g-tree='git ls-tree --name-only -r HEAD'
-
 ## Mac
 if [ "$(uname -s)" == "Darwin" ]; then
   alias bs='brew services'
