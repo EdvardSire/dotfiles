@@ -52,12 +52,6 @@ return require("packer").startup(function(use)
 		end,
 	})
 	use({
-		"sbdchd/neoformat",
-	})
-	use({
-		"windwp/nvim-ts-autotag",
-	})
-	use({
 		"hrsh7th/cmp-nvim-lsp-signature-help",
 	})
         use ({
