@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+
+exec 3<>/dev/tcp/icanhazip.com/80
+
+lines=(
+  'GET / HTTP/1.1'
+  'Host: icanhazip.com'
+  ''
+)
+
+printf '%s\r\n' "${lines[@]}" >&3
+
+while read -r data <&3; do
+  echo $data
+done
