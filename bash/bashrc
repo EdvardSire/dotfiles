@@ -29,28 +29,6 @@ alias ll='ls -l -a'
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 
-alias c='clear'
-alias e='exit'
-alias q='exit'
-
-## Mac
-if [ "$(uname -s)" == "Darwin" ]; then
-  alias bs='brew services'
-  alias reset_yabai='yabai --restart-service'
-  alias reset_skhd='skhd --restart-service'
-
-  export BASH_SILENCE_DEPRECATION_WARNING=1
-  export PATH=/opt/homebrew/bin/:$PATH
-  ssh-add --apple-load-keychain
-  bash_completion_path="/opt/homebrew/etc/bash_completion.d"
-  for file in "$bash_completion_path"/*; do
-    if [ -f "$file" ]; then
-          #echo $file
-          . $file
-    fi
-  done
-fi
-
 
 if command -v gpg &> /dev/null; then
   export GPG_TTY=$(tty)
@@ -62,6 +40,7 @@ fi
 
 if command -v nvim &> /dev/null; then
   alias vi='nvim'
+  alias vim='nvim'
   export VISUAL=nvim
   export EDITOR=nvim
 fi 
@@ -75,4 +54,4 @@ if command -v xdg-open &> /dev/null; then
 fi
 
 
-export PATH=$HOME/.local/bin:$PATH
+export PATH=$HOME/dotfiles/bin:$PATH
