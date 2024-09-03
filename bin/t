@@ -4,6 +4,21 @@ TODO_FILE="$HOME/todo.txt"
 touch "$TODO_FILE"
 usage_string="Usage: $0 [add <todo> | rm <number> | nuke]"
 
+_todo_comp() {
+    local cur prev opts
+    COMPREPLY=()  # Array to hold the completion suggestions
+    cur="${COMP_WORDS[COMP_CWORD]}"  # Current word to complete
+
+    opts="add rm nuke"
+
+    if [[ ${cur} == * ]]; then
+        COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
+    fi
+    return 0
+}
+
+complete -F _todo_comp t
+
 if [ $# -eq 0 ]; then
     if [ -s "$TODO_FILE" ]; then
         echo "Your current to-dos:"
@@ -14,7 +29,7 @@ if [ $# -eq 0 ]; then
 elif [ "$1" == "add" ] && [ $# -gt 1 ]; then
     shift
     echo "$*" >> "$TODO_FILE"
-    "$0" # Display the updateed list
+    "$0" # Display the updated list
 elif [ "$1" == "rm" ] && [ $# -eq 2 ]; then
     TODO_NUMBER=$2
     if ! [[ "$TODO_NUMBER" =~ ^[0-9]+$ ]]; then
@@ -42,5 +57,6 @@ elif [ "$1" == "nuke" ]; then
         echo "No todos to clear."
     fi
 else
-    echo "Usage: $0 [add <todo> | rm <number> | nuke]"
+    echo $usage_string
 fi
+
