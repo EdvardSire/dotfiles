@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+usage_string="Usage: $0 time[s|m]"
+
+timer() {
+  local time_input=$1
+  local multiplier=60  # default to minutes
+
+  if [[ $time_input =~ ^[0-9]+s$ ]]; then
+    multiplier=1  # seconds
+    time_input=${time_input%s}
+  elif [[ $time_input =~ ^[0-9]+m$ ]]; then
+    time_input=${time_input%m}
+  fi
+
+  local end=$((SECONDS + time_input * multiplier))
+  
+  while ((SECONDS < end)); do
+    local time_left=$((end - SECONDS))
+    printf "\r%02d:%02d" $((time_left / 60)) $((time_left % 60))
+    sleep 1
+  done
+  echo -e "\nTime's up!"
+}
+
+if [ $# -eq 0 ]; then
+  echo $usage_string
+else
+timer "$1"
+fi
