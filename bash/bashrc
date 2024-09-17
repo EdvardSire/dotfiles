@@ -29,51 +29,29 @@ alias ll='ls -l -a'
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 
-alias c='clear'
-alias e='exit'
-alias q='exit'
 
-## Mac
-if [ "$(uname -s)" == "Darwin" ]; then
-  alias bs='brew services'
-  alias reset_yabai='yabai --restart-service'
-  alias reset_skhd='skhd --restart-service'
-
-  export BASH_SILENCE_DEPRECATION_WARNING=1
-  export PATH=/opt/homebrew/bin/:$PATH
-  ssh-add --apple-load-keychain
-  bash_completion_path="/opt/homebrew/etc/bash_completion.d"
-  for file in "$bash_completion_path"/*; do
-    if [ -f "$file" ]; then
-          #echo $file
-          . $file
-    fi
-  done
-fi
-
-
-
-if [ -x $(which gpg) ]; then
+if command -v gpg &> /dev/null; then
   export GPG_TTY=$(tty)
 fi
 
-if [[ -x $(which lazygit) ]]; then
+if command -v lazygit &> /dev/null; then
   alias lg='lazygit'
 fi 
 
-if [[ -x $(which openconnect) ]]; then
-  alias vpn='sudo openconnect vpn.ntnu.no'
-fi 
-
-if [[ -x $(which nvim) ]]; then
+if command -v nvim &> /dev/null; then
   alias vi='nvim'
+  alias vim='nvim'
   export VISUAL=nvim
   export EDITOR=nvim
 fi 
 
-if [ -x $(which t) ]; then
+if command -v t &> /dev/null; then
   export PATH=$HOME/.config/tmux/plugins/t-smart-tmux-session-manager/bin:$PATH
-fi 
+fi
+
+if command -v xdg-open &> /dev/null; then
+  alias open='xdg-open'
+fi
 
 
-export PATH=$HOME/.local/bin:$PATH
+export PATH=$HOME/dotfiles/bin:$PATH

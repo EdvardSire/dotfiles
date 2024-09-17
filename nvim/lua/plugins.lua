@@ -18,12 +18,6 @@ return require("packer").startup(function(use)
 		run = "TSUpdate",
 	})
 	use({
-		"numToStr/Comment.nvim",
-		config = function()
-			require("Comment").setup()
-		end,
-	})
-	use({
 		"mbbill/undotree",
 	})
 	use({
@@ -58,29 +52,20 @@ return require("packer").startup(function(use)
 		end,
 	})
 	use({
-		"sbdchd/neoformat",
-	})
-	use({
-		"windwp/nvim-ts-autotag",
-	})
-	use({
 		"hrsh7th/cmp-nvim-lsp-signature-help",
 	})
-	use({
-		"lukas-reineke/indent-blankline.nvim",
+        use ({
+     		"romgrk/nvim-treesitter-context",
+    		requires = { "nvim-treesitter/nvim-treesitter" }, -- nvim-treesitter-context depends on nvim-treesitter
+    		config = function()
+       			local ctx = require "treesitter-context"
+       			ctx.setup {}
+    		end,
 	})
-  use ({
-    "romgrk/nvim-treesitter-context",
-    requires = { "nvim-treesitter/nvim-treesitter" }, -- nvim-treesitter-context depends on nvim-treesitter
-    config = function()
-       local ctx = require "treesitter-context"
-       ctx.setup {}
-    end,
-  })
-  use({
-    "iamcco/markdown-preview.nvim",
-    run = function() vim.fn["mkdp#util#install"]() end,
-})
+	use({
+	    "iamcco/markdown-preview.nvim",
+	    run = function() vim.fn["mkdp#util#install"]() end,
+	})
 
-use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install", setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
+	use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install", setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
 end)

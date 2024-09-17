@@ -1,1 +1,1 @@
-# Personal configuration files
+# Configuration files

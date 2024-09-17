@@ -1,0 +1,77 @@
+#!/usr/bin/env bash
+
+API_URL='http://pi.edvardsire.com:8500/api/v1'
+USAGE_STRING='Usage: [add <todo> | rm <number> | nuke]'
+RESPONSE_KEY=todos
+
+
+function show_todos() {
+    response=$(curl -s "$API_URL/todos")
+    todos=$(echo "$response" | jq -r '.todos | length')
+
+    if [ "$todos" -gt 0 ]; then
+        echo "Your current to-dos:"
+        echo "$response" | jq -r '.todos | to_entries[] | "\(.key + 1). \(.value)"'
+    else
+        echo "No todos found."
+    fi
+}
+
+function add_todo() {
+    local todo_item="$*"
+    response=$(curl -s -X POST "$API_URL/todo" -H "Content-Type: application/json" -d "{\"todo\":\"$todo_item\"}")
+    show_todos
+}
+
+function remove_todo() {
+    local todo_number=$1
+    if ! [[ "$todo_number" =~ ^[0-9]+$ ]]; then
+        echo "Error: Please provide a valid number."
+        exit 1
+    fi
+
+    response=$(curl -s -X DELETE "$API_URL/todo/$todo_number")
+    show_todos
+}
+
+function nuke_todos() {
+    read -p "Are you sure you want to clear all tasks? (Y/n): " CONFIRM
+    CONFIRM=${CONFIRM:-y}
+    if [[ "$CONFIRM" =~ ^[Yy]$ ]]; then
+        response=$(curl -s -X DELETE "$API_URL/nuke" -H 'accept: application/json')
+        echo "All tasks have been cleared."
+    else
+        echo "Nuke operation cancelled."
+    fi
+}
+
+
+case "$1" in
+    "")
+        show_todos
+        ;;
+    add)
+        if [ $# -gt 1 ]; then
+            shift
+            add_todo "$@"
+        else
+            echo "Error: No todo item specified."
+            exit 1
+        fi
+        ;;
+    rm)
+        if [ $# -eq 2 ]; then
+            remove_todo "$2"
+        else
+            echo "Error: Please provide a valid number."
+            exit 1
+        fi
+        ;;
+    nuke)
+        nuke_todos
+        ;;
+    *)
+        echo $USAGE_STRING
+        ;;
+esac
+
