@@ -66,4 +66,4 @@ async def clear_all_todos(api_key: str = Depends(verify_api_key)):
 
 if __name__ == "__main__":
     PORT = 8500
-    uvicorn.run("server:app", host="0.0.0.0", port=PORT, reload=True)
+    uvicorn.run("t_server:app", host="0.0.0.0", port=PORT, reload=True)
