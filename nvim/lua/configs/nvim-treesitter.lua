@@ -13,7 +13,8 @@ require("nvim-treesitter.configs").setup({
 		"rust",
 		"tsx",
 		"typescript",
-    "bash"
+    "bash",
+    "vimdoc",
 	},
 
 	-- Install parsers synchronously (only applied to `ensure_installed`)

@@ -4,7 +4,20 @@ vim.keymap.set("i", "jk", "<ESC>")
 vim.keymap.set("n", "<leader>w", ":w<CR>")
 vim.keymap.set("n", "<leader>n", ":noh<CR>")
 vim.keymap.set("n", "<leader>p", ":E<CR>")
-vim.keymap.set("n", "<leader>r", ":!python3 %<CR>")
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = {"python", "sh"}, 
+  callback = function()
+    vim.keymap.set("n", "<leader>r", function()
+      local ft = vim.bo.filetype
+      local file = vim.fn.expand('%')  -- Get the current file path
+      if ft == "python" then
+        vim.cmd("!python3 " .. file)
+      elseif ft == "sh" then
+        vim.cmd("!bash " .. file)
+      end
+    end)
+  end
+})
 -- vim.keymap.set("n", "<leader>a", '"+y<CR>')
 
 -- Window movement
