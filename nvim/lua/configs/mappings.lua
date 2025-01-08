@@ -5,7 +5,7 @@ vim.keymap.set("n", "<leader>w", ":w<CR>")
 vim.keymap.set("n", "<leader>n", ":noh<CR>")
 vim.keymap.set("n", "<leader>p", ":E<CR>")
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = {"python", "sh"}, 
+  pattern = {"python", "sh", "elixir"}, 
   callback = function()
     vim.keymap.set("n", "<leader>r", function()
       local ft = vim.bo.filetype
@@ -14,6 +14,8 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.cmd("!python3 " .. file)
       elseif ft == "sh" then
         vim.cmd("!bash " .. file)
+      elseif ft == "elixir" then
+        vim.cmd("!elixir " .. file)
       end
     end)
   end

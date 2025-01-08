@@ -15,6 +15,7 @@ require("nvim-treesitter.configs").setup({
 		"typescript",
     "bash",
     "vimdoc",
+    "elixir", "eex", "heex",
 	},
 
 	-- Install parsers synchronously (only applied to `ensure_installed`)
