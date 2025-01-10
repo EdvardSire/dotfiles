@@ -95,6 +95,10 @@ lspconfig.pyright.setup({
   on_attach = lsp_attach,
 })
 
+lspconfig.gopls.setup({
+  on_attach = lsp_attach,
+})
+
 lspconfig.elixirls.setup({
   on_attach = lsp_attach,
   cmd = { "/home/user/.local/share/nvim/mason/packages/elixir-ls/language_server.sh" },

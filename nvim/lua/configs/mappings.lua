@@ -5,7 +5,7 @@ vim.keymap.set("n", "<leader>w", ":w<CR>")
 vim.keymap.set("n", "<leader>n", ":noh<CR>")
 vim.keymap.set("n", "<leader>p", ":E<CR>")
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = {"python", "sh", "elixir"}, 
+  pattern = {"python", "sh", "elixir", "go", "c"}, 
   callback = function()
     vim.keymap.set("n", "<leader>r", function()
       local ft = vim.bo.filetype
@@ -16,6 +16,14 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.cmd("!bash " .. file)
       elseif ft == "elixir" then
         vim.cmd("!elixir " .. file)
+      elseif ft == "go" then
+        vim.cmd("!go run " .. file)
+      elseif ft == "c" then
+        -- :h filename-modifiers
+        local dir_next_to_sourcefile = vim.fn.expand('%:p:h')
+        local default_program_name = "program"
+        vim.cmd("!make -C " .. dir_next_to_sourcefile)
+        vim.cmd("!" ..dir_next_to_sourcefile .. "/" .. default_program_name)
       end
     end)
   end
