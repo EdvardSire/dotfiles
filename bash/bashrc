@@ -45,12 +45,12 @@ if command -v nvim &> /dev/null; then
   export EDITOR=nvim
 fi 
 
-if command -v t &> /dev/null; then
-  export PATH=$HOME/.config/tmux/plugins/t-smart-tmux-session-manager/bin:$PATH
-fi
-
 if command -v xdg-open &> /dev/null; then
   alias open='xdg-open'
+fi
+
+if fzf -v xdg-open &> /dev/null; then
+  export FZF_DEFAULT_COMMAND='find . -type d -not -path "./.git*" -not -path "*/.*"'
 fi
 
 
