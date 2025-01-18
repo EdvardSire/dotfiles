@@ -49,7 +49,7 @@ if command -v xdg-open &> /dev/null; then
   alias open='xdg-open'
 fi
 
-if fzf -v xdg-open &> /dev/null; then
+if command -v fzf &> /dev/null; then
   export FZF_DEFAULT_COMMAND='find . -type d -not -path "./.git*" -not -path "*/.*"'
 fi
 
