@@ -51,6 +51,7 @@ fi
 
 if command -v fzf &> /dev/null; then
   export FZF_DEFAULT_COMMAND='find . -type d -not -path "./.git*" -not -path "*/.*"'
+  alias f='cd "$(fzf)"'
 fi
 
 
