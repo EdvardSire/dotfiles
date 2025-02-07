@@ -54,5 +54,11 @@ if command -v fzf &> /dev/null; then
   alias f='cd "$(fzf)"'
 fi
 
+if command -v git &> /dev/null; then
+  alias g='git'
+fi
+
+
+
 
 export PATH=$HOME/dotfiles/bin:$PATH
