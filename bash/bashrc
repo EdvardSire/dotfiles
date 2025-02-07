@@ -28,6 +28,7 @@ alias lsa='ls -a'
 alias ll='ls -l -a'
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
+alias remove_spaces='for file in *; do mv -vn "$file" "${file// /}"; done'
 
 
 if command -v gpg &> /dev/null; then
