@@ -72,34 +72,24 @@ end
 -- Mason
 require("mason").setup()
 local lspconfig = require('lspconfig')
-local get_servers = require("mason-lspconfig").get_installed_servers
-local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
-
--- for _, server_name in ipairs(get_servers()) do
--- 	lspconfig[server_name].setup({
--- 		on_attach = lsp_attach,
--- 		capabilities = lsp_capabilities,
--- 		settings = {
--- 			Lua = {
--- 				diagnostics = { globals = { "vim" } },
--- 			},
--- 		},
--- 	})
--- end
 
 lspconfig.clangd.setup({
   on_attach = lsp_attach,
 })
-
 lspconfig.pyright.setup({
   on_attach = lsp_attach,
 })
-
 lspconfig.gopls.setup({
   on_attach = lsp_attach,
 })
-
-lspconfig.elixirls.setup({
+lspconfig.html.setup({
   on_attach = lsp_attach,
-  cmd = { "/home/user/.local/share/nvim/mason/packages/elixir-ls/language_server.sh" },
 })
+-- lspconfig."vscode-html-language-server".setup({
+--   on_attach = lsp_attach,
+-- })
+
+-- lspconfig.elixirls.setup({
+--   on_attach = lsp_attach,
+--   cmd = { "/home/user/.local/share/nvim/mason/packages/elixir-ls/language_server.sh" },
+-- })
