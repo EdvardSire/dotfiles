@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+[ -z "$1" ] && { echo "Usage: $0 user@host"; exit 1; }
+
+ssh $1 'dd if=/dev/zero bs=1G count=3 status=none' | dd of=/dev/null status=progress
+

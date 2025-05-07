@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+DEFAULT_USER='user'
+[ "$#" -ne 2 ] && { echo "Usage: $0 'host' 'proxy'" && exit 1; }
+
+ssh -f -N -L 3389:"$1":3389 "$2" && xfreerdp /u:"$DEFAULT_USER" /v:localhost /f
