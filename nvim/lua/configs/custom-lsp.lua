@@ -85,10 +85,9 @@ lspconfig.gopls.setup({
 lspconfig.html.setup({
   on_attach = lsp_attach,
 })
--- lspconfig."vscode-html-language-server".setup({
---   on_attach = lsp_attach,
--- })
-
+lspconfig.bashls.setup({
+  on_attach = lsp_attach,
+})
 -- lspconfig.elixirls.setup({
 --   on_attach = lsp_attach,
 --   cmd = { "/home/user/.local/share/nvim/mason/packages/elixir-ls/language_server.sh" },
