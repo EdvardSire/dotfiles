@@ -66,5 +66,18 @@ if command -v git &> /dev/null; then
   alias g='git'
 fi
 
+if command -v lf &> /dev/null; then
+    lfcd () {
+        # `command` is needed in case `lfcd` is aliased to `lf`
+        cd "$(command lf -print-last-dir "$@")" || exit
+    }
+    alias lf='lfcd'
+fi
+
 
 export PATH=$HOME/dotfiles/bin:$PATH
+export PATH=$HOME/repos/zenbook-duo-2024-ux8406ma-linux:$PATH
+
+if command -v zoxide &> /dev/null; then
+    eval "$(zoxide init bash)"
+fi
