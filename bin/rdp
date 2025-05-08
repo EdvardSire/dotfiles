@@ -11,4 +11,4 @@ cleanup() {
 }
 trap cleanup EXIT
 
-xfreerdp /u:"$DEFAULT_USER" /v:localhost
+xfreerdp /u:"$DEFAULT_USER" /v:localhost /network:auto /f
