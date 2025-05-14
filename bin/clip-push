@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+# [ -z "$1" ] && { echo "Usage: $0 text"; exit 1; }
+
+ID=$(kdeconnect-cli --list-devices --id-only)
+kdeconnect-cli --device "$ID" --share-text "$(xsel -o)"
