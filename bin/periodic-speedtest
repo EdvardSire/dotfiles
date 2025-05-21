@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+LOGFILE=/var/log/speedtest.log
+timestamp=$(date +"%Y-%m-%d %H:%M:%S")
+results=$(speedtest.py --json | jq '{ping, download_mbps: (.download/1e6), upload_mbps: (.upload/1e6)}')
+echo -e "$timestamp \n $results \n" >> $LOGFILE
