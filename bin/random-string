@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+[ -z "$1" ] && { echo "Usage: $0 N"; exit 1; }
+
+tr -dc A-Za-z0-9 </dev/urandom | head -c $1; echo

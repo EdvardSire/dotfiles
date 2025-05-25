@@ -48,6 +48,7 @@ cmp.setup({
 	}),
 	-- sources = cmp.config.sources({ { name = "nvim_lsp", name = "nvim_lsp_signature_help" } }),
 	sources = cmp.config.sources({
+        { name = 'path' },
 		{ name = "nvim_lsp" },
 		{ name = "nvim_lsp_signature_help" },
 	}),
@@ -72,34 +73,23 @@ end
 -- Mason
 require("mason").setup()
 local lspconfig = require('lspconfig')
-local get_servers = require("mason-lspconfig").get_installed_servers
-local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
-
--- for _, server_name in ipairs(get_servers()) do
--- 	lspconfig[server_name].setup({
--- 		on_attach = lsp_attach,
--- 		capabilities = lsp_capabilities,
--- 		settings = {
--- 			Lua = {
--- 				diagnostics = { globals = { "vim" } },
--- 			},
--- 		},
--- 	})
--- end
 
 lspconfig.clangd.setup({
   on_attach = lsp_attach,
 })
-
 lspconfig.pyright.setup({
   on_attach = lsp_attach,
 })
-
 lspconfig.gopls.setup({
   on_attach = lsp_attach,
 })
-
-lspconfig.elixirls.setup({
+lspconfig.html.setup({
   on_attach = lsp_attach,
-  cmd = { "/home/user/.local/share/nvim/mason/packages/elixir-ls/language_server.sh" },
 })
+lspconfig.bashls.setup({
+  on_attach = lsp_attach,
+})
+-- lspconfig.elixirls.setup({
+--   on_attach = lsp_attach,
+--   cmd = { "/home/user/.local/share/nvim/mason/packages/elixir-ls/language_server.sh" },
+-- })
