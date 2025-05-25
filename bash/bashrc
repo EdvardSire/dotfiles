@@ -74,6 +74,12 @@ if command -v lf &> /dev/null; then
     alias lf='lfcd'
 fi
 
+if command -v xsel &> /dev/null; then
+  x() {
+    tr -d '\n' | xsel -bi
+  }
+fi
+
 
 export PATH=$HOME/dotfiles/bin:$PATH
 export PATH=$HOME/repos/zenbook-duo-2024-ux8406ma-linux:$PATH
