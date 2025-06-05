@@ -11,9 +11,6 @@ RUN mkdir -p ~/.local_build && cd ~/.local_build && \
     make CMAKE_BUILD_TYPE=RelWithDebInfo && \
     make install -j$(nproc) -l$(nrpoc)
 
-RUN git clone --depth 1 https://github.com/wbthomason/packer.nvim \
-    ~/.local/share/nvim/site/pack/packer/start/packer.nvim
-
 RUN cd && git clone https://github.com/EdvardSire/dotfiles.git && \
     mkdir -p ~/.config && \
     ln -s ~/dotfiles/nvim ~/.config/nvim
