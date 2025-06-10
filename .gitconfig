@@ -18,3 +18,7 @@
 
 [init]
 	defaultBranch = main
+
+[diff]
+  tool = meld
+  prompt = false
