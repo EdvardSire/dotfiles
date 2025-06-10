@@ -1,6 +1,13 @@
 [user]
 	email = mail@edvardsire.com
 	name = Edvard Sire
+    signingkey = 2BA3AE75B7BA9340
+
+[commit]
+    gpgsign = true
+
+[gpg]
+    program = gpg
 
 [alias]
   aliases = "!git config --global -l | grep ^alias | sed s/alias.// | sort"
