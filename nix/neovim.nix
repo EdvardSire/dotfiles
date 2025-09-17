@@ -48,6 +48,7 @@ let
   '';
 in
 symlinkJoin {
+  meta.mainProgram = "nvim"; # for appimage bundling
   name = "nvim";
   paths = [ neovim-unwrapped ];
   nativeBuildInputs = [ makeWrapper ];
