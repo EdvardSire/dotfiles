@@ -20,9 +20,10 @@ jobs:
           nix bundle --bundler github:ralismark/nix-appimage .#neovim
           cp nvim.AppImage nix-nvim.AppImage
 
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
+      - name: Create or upload to release
+        uses: softprops/action-gh-release@v2
         with:
-          name: neovim-appimage
-          path: nix-nvim.AppImage
+          files: nix-nvim.AppImage
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
