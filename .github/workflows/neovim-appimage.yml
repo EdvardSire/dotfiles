@@ -18,6 +18,7 @@ jobs:
       - name: Build Neovim AppImage
         run: |
           nix bundle --bundler github:ralismark/nix-appimage .#neovim
+          ls
           cp nvim.Appimage nix-nvim.Appimage
 
       - name: Upload artifact
