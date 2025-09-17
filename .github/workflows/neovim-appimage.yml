@@ -20,10 +20,21 @@ jobs:
           nix bundle --bundler github:ralismark/nix-appimage .#neovim
           cp nvim.AppImage nix-nvim.AppImage
 
-      - name: Create or upload to release
-        uses: softprops/action-gh-release@v2
-        with:
-          files: nix-nvim.AppImage
+      - name: Authenticate GitHub CLI
+        run: gh auth setup-git
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create draft release if it doesn't exist
+        run: |
+          gh release view manual-release || \
+          gh release create manual-release --draft
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload AppImage to release
+        run: |
+          gh release upload manual-release nix-nvim.AppImage --clobber
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
