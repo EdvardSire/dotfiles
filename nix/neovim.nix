@@ -6,57 +6,73 @@
   vimPlugins,
   lib,
   pyright,
-}: let
+  llvmPackages_18,
+  vscode-langservers-extracted,
+  bash-language-server,
+  typescript-language-server,
+  cmake-language-server,
+  nil,
+  rust-analyzer,
+}:
+let
   packageName = "edvard-neovim";
 
   startPlugins = [
     vimPlugins.plenary-nvim
-    vimPlugins.telescope-nvim
-    vimPlugins.nord-nvim
-    vimPlugins.lualine-nvim
-    vimPlugins.gitsigns-nvim
-    vimPlugins.nvim-treesitter.withAllGrammars
-    vimPlugins.nvim-cmp
-    vimPlugins.nvim-lspconfig
+    vimPlugins.telescope-nvim # search
+    vimPlugins.nord-nvim # color
+    vimPlugins.lualine-nvim # nice line
+    vimPlugins.gitsigns-nvim # git
+    vimPlugins.nvim-treesitter.withAllGrammars # pretty AST
+    vimPlugins.nvim-cmp # completion
+    vimPlugins.nvim-lspconfig # completion
   ];
 
   foldPlugins = builtins.foldl' (
     acc: next:
-      acc
-      ++ [
-        next
-      ]
-      ++ (foldPlugins (next.dependencies or []))
-  ) [];
+    acc
+    ++ [
+      next
+    ]
+    ++ (foldPlugins (next.dependencies or [ ]))
+  ) [ ];
 
   startPluginsWithDeps = lib.unique (foldPlugins startPlugins);
 
-  packpath = runCommandLocal "packpath" {} ''
+  packpath = runCommandLocal "packpath" { } ''
     mkdir -p $out/pack/${packageName}/{start,opt}
 
-    ${
-      lib.concatMapStringsSep
-      "\n"
-      (plugin: "ln -vsfT ${plugin} $out/pack/${packageName}/start/${lib.getName plugin}")
-      startPluginsWithDeps
-    }
+    ${lib.concatMapStringsSep "\n" (
+      plugin: "ln -vsfT ${plugin} $out/pack/${packageName}/start/${lib.getName plugin}"
+    ) startPluginsWithDeps}
   '';
 in
-  symlinkJoin {
-    name = "nvim";
-    paths = [neovim-unwrapped];
-    nativeBuildInputs = [makeWrapper];
-    postBuild = ''
-      wrapProgram $out/bin/nvim \
-        --prefix PATH : ${lib.makeBinPath [ pyright]} \
-        --add-flags '-u' \
-        --add-flags '${./init.lua}' \
-        --add-flags '--cmd' \
-        --add-flags "'set packpath^=${packpath} | set runtimepath^=${packpath}'" \
-        --set-default NVIM_APPNAME nvim-custom
-    '';
+symlinkJoin {
+  name = "nvim";
+  paths = [ neovim-unwrapped ];
+  nativeBuildInputs = [ makeWrapper ];
+  postBuild = ''
+    wrapProgram $out/bin/nvim \
+      --prefix PATH : ${
+        lib.makeBinPath [
+          pyright
+          llvmPackages_18.clang-tools
+          vscode-langservers-extracted
+          bash-language-server
+          typescript-language-server
+          cmake-language-server
+          nil
+          rust-analyzer
+        ]
+      } \
+      --add-flags '-u' \
+      --add-flags '${./init.lua}' \
+      --add-flags '--cmd' \
+      --add-flags "'set packpath^=${packpath} | set runtimepath^=${packpath}'" \
+      --set-default NVIM_APPNAME nvim-custom
+  '';
 
-    passthru = {
-      inherit packpath;
-    };
-  }
+  passthru = {
+    inherit packpath;
+  };
+}
