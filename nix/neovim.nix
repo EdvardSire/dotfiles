@@ -5,6 +5,7 @@
   runCommandLocal,
   vimPlugins,
   lib,
+  pyright,
 }: let
   packageName = "edvard-neovim";
 
@@ -47,6 +48,7 @@ in
     nativeBuildInputs = [makeWrapper];
     postBuild = ''
       wrapProgram $out/bin/nvim \
+        --prefix PATH : ${lib.makeBinPath [ pyright]} \
         --add-flags '-u' \
         --add-flags '${./init.lua}' \
         --add-flags '--cmd' \
