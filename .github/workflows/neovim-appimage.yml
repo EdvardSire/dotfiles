@@ -10,20 +10,40 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
+      - name: Set up QEMU for cross-building
+        uses: docker/setup-qemu-action@v1
+        with:
+          platforms: aarch64
+
       - name: Install Nix
         uses: cachix/install-nix-action@v27
         with:
           nix_path: nixpkgs=channel:nixos-25.05
 
-      - name: Build Neovim AppImage
+      - name: Build x86_64 AppImage
         run: |
-          nix bundle --bundler github:ralismark/nix-appimage .#neovim
-          cp nvim.AppImage nix-nvim.AppImage
+          nix bundle --bundler github:ralismark/nix-appimage .#packages.x86_64-linux.neovim
+          cp nvim.AppImage nvim-x86_64.AppImage
 
-      - name: Create or upload to release
-        uses: softprops/action-gh-release@v2
-        with:
-          files: nix-nvim.AppImage
+      - name: Build aarch64 AppImage
+        run: |
+          nix bundle --bundler github:ralismark/nix-appimage --system aarch64-linux .#packages.aarch64-linux.neovim
+          cp nvim.AppImage nvim-aarch64.AppImage
+
+      - name: Authenticate GitHub CLI
+        run: gh auth setup-git
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Create public release if it doesn't exist
+        run: |
+          gh release view latest || \
+          gh release create latest --title "Latest Neovim AppImage" --notes "Automatically updated AppImage" --draft=false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload AppImages to release
+        run: |
+          gh release upload latest nvim-x86_64.AppImage nvim-aarch64.AppImage --clobber
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
