@@ -25,16 +25,16 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Create draft release if it doesn't exist
+      - name: Create public release if it doesn't exist
         run: |
-          gh release view manual-release || \
-          gh release create manual-release --draft
+          gh release view latest || \
+          gh release create latest --title "Latest Neovim AppImage" --notes "Automatically updated AppImage" --draft=false
+
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload AppImage to release
         run: |
-          gh release upload manual-release nix-nvim.AppImage --clobber
+          gh release upload latest nix-nvim.AppImage --clobber
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
