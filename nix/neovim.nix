@@ -24,6 +24,7 @@ let
     vimPlugins.lualine-nvim # nice line
     vimPlugins.gitsigns-nvim # git
     vimPlugins.nvim-treesitter.withAllGrammars # pretty AST
+    vimPlugins.nvim-autopairs # brackets
     vimPlugins.nvim-lspconfig 
     vimPlugins.nvim-lspconfig
     vimPlugins.nvim-cmp
