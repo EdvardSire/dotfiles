@@ -24,8 +24,13 @@ let
     vimPlugins.lualine-nvim # nice line
     vimPlugins.gitsigns-nvim # git
     vimPlugins.nvim-treesitter.withAllGrammars # pretty AST
-    vimPlugins.nvim-cmp # completion
-    vimPlugins.nvim-lspconfig # completion
+    vimPlugins.nvim-lspconfig 
+    vimPlugins.nvim-lspconfig
+    vimPlugins.nvim-cmp
+    vimPlugins.cmp-path
+    vimPlugins.cmp-nvim-lsp
+    vimPlugins.cmp-nvim-lsp-signature-help
+    vimPlugins.luasnip
   ];
 
   foldPlugins = builtins.foldl' (
