@@ -6,13 +6,9 @@ if [[ -z "$IN_NIX_SHELL" ]]; then
 fi
 
 if [ -z "$SIOYEK_DB_DIR" ]; then
-    echo "SIOYEK_DB_DIR is not set."
+    echo "SIOYEK_DB_DIR is not set! It might be SIOYEK_DB_DIR=$(realpath ~/.local/share/sioyek/)"
     exit 1
 else
-  if command -v sqlite3 &> /dev/null; then
-    echo "no sqlite3, [nix-shell -p sqlite3]"
-  fi
-
   find . -type f -name "*.pdf" -print0 | while IFS= read -r -d '' file; do
     real_path=$(realpath "$file")
     hash=$(md5sum "$file" | awk '{print $1}')
