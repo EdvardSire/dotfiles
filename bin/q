@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-GROQ_API_KEY=''
-
 if [ "$#" -gt 0 ]; then
     input="$@"
 else
@@ -10,16 +8,16 @@ else
 fi
 
 # model='llama-guard-3-8b'
-model='llama3-70b-8192'
+# model='llama3-70b-8192'
 # model='llama3-8b-8192'
 # model='mixtral-8x7b-32768'
 # model='gemma-7b-it'
-# model='gemma2-9b-it'
+model='gemma2-9b-it'
 
 system_prompt='You are going to reply succinctly'
 response=$(curl -s -X POST "https://api.groq.com/openai/v1/chat/completions" \
      -H "Authorization: Bearer $GROQ_API_KEY" \
      -H "Content-Type: application/json" \
      -d "{\"messages\": [ {\"role\": \"system\", \"content\": \"$system_prompt\"}, {\"role\": \"user\", \"content\": \"$input\"} ], \"model\": \"$model\"}")
-echo 
-echo $(echo "$response" | jq -r '.choices[0].message.content')
+# echo $response
+echo "$response" | jq -r '.choices[0].message.content'
