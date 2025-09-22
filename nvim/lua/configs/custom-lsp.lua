@@ -76,6 +76,7 @@ local lspconfig = require('lspconfig')
 
 lspconfig.clangd.setup({
   on_attach = lsp_attach,
+  mason = false,
 })
 lspconfig.pyright.setup({
   on_attach = lsp_attach,
@@ -87,6 +88,18 @@ lspconfig.html.setup({
   on_attach = lsp_attach,
 })
 lspconfig.bashls.setup({
+  on_attach = lsp_attach,
+})
+lspconfig["nil_ls"].setup({
+  on_attach = lsp_attach,
+})
+lspconfig["ts_ls"].setup({
+  on_attach = lsp_attach,
+})
+lspconfig.cmake.setup({
+  on_attach = lsp_attach,
+})
+lspconfig["rust_analyzer"].setup({
   on_attach = lsp_attach,
 })
 -- lspconfig.elixirls.setup({
