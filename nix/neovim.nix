@@ -13,6 +13,7 @@
   cmake-language-server,
   nil,
   rust-analyzer,
+  ripgrep,
 }:
 let
   packageName = "edvard-neovim";
@@ -70,6 +71,7 @@ symlinkJoin {
           cmake-language-server
           nil
           rust-analyzer
+          ripgrep
         ]
       } \
       --add-flags '-u' \
