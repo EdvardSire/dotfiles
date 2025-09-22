@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+set -e
+
+COMPRESSED_ENDING='.tar.zst'
+ALL='all'
+[ "$#" -lt 2 ] && { echo "Usage: $0 dir/to/backup host@domain [$COMPRESSED_ENDING (default) | $ALL] "; exit 1; }
+[[ "$3" != "$ALL" && "$3" != "$COMPRESSED_ENDING" ]] && { echo "Third argument must be '$ALL' or '$COMPRESSED_ENDING'"; exit 1; }
+
+backup_dir=$1
+remote_host=$2
+optional_setting=${3:-"default_value"}
+
+echo "Backing up $backup_dir to $remote_host"
+echo "Optional setting: $optional_setting"
+
+
