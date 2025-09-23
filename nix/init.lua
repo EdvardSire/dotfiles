@@ -62,6 +62,21 @@ vim.api.nvim_create_autocmd("FileType", {
     end)
   end
 })
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "gitcommit",
+    callback = function()
+        local buf = vim.api.nvim_get_current_buf()
+        -- insert lines at the top (0 = start of buffer)
+        vim.api.nvim_buf_set_lines(buf, 0, 0, false, {
+            "# Please enter the commit message for your changes",
+            "# Lines starting with '#' will be ignored"
+            "test test"
+        })
+        -- move cursor to line 1
+        vim.api.nvim_win_set_cursor(0, {3, 0})
+    end,
+})
+
 -- vim.keymap.set("n", "<leader>a", '"+y<CR>')
 
 -- Window movement
