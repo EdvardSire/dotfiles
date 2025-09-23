@@ -11,7 +11,7 @@ stdenv.mkDerivation {
 
   dontUnpack = true;
 
-  buildInputs = [
+  propagatedBuildInputs = [
     jq
     curl
   ];
