@@ -1,23 +1,35 @@
 #!/usr/bin/env bash
 
-if [ "$#" -gt 0 ]; then
-    input="$@"
-else
-  echo 'No input provided <|*_*|>'
-  exit 0
+# Start with command-line arguments if any
+input="$*"
+
+# If still empty, 
+# Append stdin if present (without blocking if none)
+if [ ! -t 0 ]; then
+    stdin=$(cat)
+    if [ -n "$stdin" ]; then
+        if [ -n "$input" ]; then
+            input="$input $stdin"
+        else
+            input="$stdin"
+        fi
+    fi
 fi
 
-# model='llama-guard-3-8b'
-# model='llama3-70b-8192'
-# model='llama3-8b-8192'
-# model='mixtral-8x7b-32768'
-# model='gemma-7b-it'
-model='gemma2-9b-it'
+if [ -z "$input" ]; then
+    echo 'No input provided <|*_*|>'
+    exit 0
+fi
+
+json_input=$(printf "%s" "$input" | jq -Rs .)
+# echo "$json_input"
+
+model='qwen/qwen3-32b'
 
 system_prompt='You are going to reply succinctly'
 response=$(curl -s -X POST "https://api.groq.com/openai/v1/chat/completions" \
      -H "Authorization: Bearer $GROQ_API_KEY" \
      -H "Content-Type: application/json" \
-     -d "{\"messages\": [ {\"role\": \"system\", \"content\": \"$system_prompt\"}, {\"role\": \"user\", \"content\": \"$input\"} ], \"model\": \"$model\"}")
-# echo $response
+     -d "{\"messages\": [ {\"role\": \"system\", \"content\": \"$system_prompt\"}, {\"role\": \"user\", \"content\": $json_input} ], \"model\": \"$model\"}")
+# echo "$response"
 echo "$response" | jq -r '.choices[0].message.content'

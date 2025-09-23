@@ -66,14 +66,16 @@ vim.api.nvim_create_autocmd("FileType", {
     pattern = "gitcommit",
     callback = function()
         local buf = vim.api.nvim_get_current_buf()
-        -- insert lines at the top (0 = start of buffer)
-        vim.api.nvim_buf_set_lines(buf, 0, 0, false, {
-            "# Please enter the commit message for your changes",
-            "# Lines starting with '#' will be ignored"
-            "test test"
-        })
-        -- move cursor to line 1
-        vim.api.nvim_win_set_cursor(0, {3, 0})
+        local promt = "Create a conventional commit message with one succint line, then bullet points. This should be the last text and only in plaintext"
+        local handle = io.popen('git diff | q ' .. promt)
+        local result = handle:read("*a")
+        handle:close()
+
+        local lines = {} -- split output into lines
+        for line in result:gmatch("[^\r\n]+") do table.insert(lines, line) end
+
+        vim.api.nvim_buf_set_lines(buf, 0, 0, false, lines)
+        vim.api.nvim_win_set_cursor(0, {#lines + 1, 0})
     end,
 })
 
