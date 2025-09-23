@@ -66,7 +66,7 @@ vim.api.nvim_create_autocmd("FileType", {
     pattern = "gitcommit",
     callback = function()
         local buf = vim.api.nvim_get_current_buf()
-        local promt = "Create a conventional commit message with one succint line, then bullet points. This should be the last text and only in plaintext"
+        local promt = "Create a conventional commit message with one succint line, then bullet points. This should be the last text, only in plaintext no markdown and straight to the point technical"
         local handle = io.popen('git diff --staged | q ' .. promt)
         local result = handle:read("*a")
         handle:close()
