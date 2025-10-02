@@ -39,25 +39,26 @@ vim.keymap.set("n", "<leader>w", ":w<CR>")
 vim.keymap.set("n", "<leader>n", ":noh<CR>")
 vim.keymap.set("n", "<leader>p", ":E<CR>")
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = {"python", "sh", "elixir", "go", "c"}, 
+  pattern = {"python", "sh", "elixir", "go", "c", "rust"},
   callback = function()
     vim.keymap.set("n", "<leader>r", function()
-      local ft = vim.bo.filetype
+      local filetype = vim.bo.filetype
       local file = vim.fn.expand('%')  -- Get the current file path
-      if ft == "python" then
+      if filetype == "python" then
         vim.cmd("!python3 " .. file)
-      elseif ft == "sh" then
+      elseif filetype == "sh" then
         vim.cmd("!bash " .. file)
-      elseif ft == "elixir" then
+      elseif filetype == "elixir" then
         vim.cmd("!elixir " .. file)
-      elseif ft == "go" then
+      elseif filetype == "go" then
         vim.cmd("!go run " .. file)
-      elseif ft == "c" then
-        -- :h filename-modifiers
-        local dir_next_to_sourcefile = vim.fn.expand('%:p:h')
+      elseif filetype == "c" then
+        local dir_next_to_sourcefile = vim.fn.expand('%:p:h') -- :h filename-modifiers
         local default_program_name = "program"
         vim.cmd("!make -C " .. dir_next_to_sourcefile)
         vim.cmd("!" ..dir_next_to_sourcefile .. "/" .. default_program_name)
+      elseif filetype == "rust" then
+        vim.cmd("!cargo run" )
       end
     end)
   end
@@ -385,42 +386,26 @@ local lsp_attach = function(_, bufnr)
 	vim.keymap.set("n", "gl", vim.diagnostic.open_float, { buffer = bufnr })
 end
 
--- Mason
--- require("mason").setup()
-local lspconfig = require('lspconfig')
 
-lspconfig.clangd.setup({
-  on_attach = lsp_attach,
-  mason = false,
-})
-lspconfig.pyright.setup({
-  on_attach = lsp_attach,
-})
-lspconfig.gopls.setup({
-  on_attach = lsp_attach,
-})
-lspconfig.html.setup({
-  on_attach = lsp_attach,
-})
-lspconfig.bashls.setup({
-  on_attach = lsp_attach,
-})
-lspconfig["nil_ls"].setup({
-  on_attach = lsp_attach,
-})
-lspconfig["ts_ls"].setup({
-  on_attach = lsp_attach,
-})
-lspconfig.cmake.setup({
-  on_attach = lsp_attach,
-})
-lspconfig["rust_analyzer"].setup({
-  on_attach = lsp_attach,
-})
--- lspconfig.elixirls.setup({
---   on_attach = lsp_attach,
---   cmd = { "/home/user/.local/share/nvim/mason/packages/elixir-ls/language_server.sh" },
--- })
+local servers = {
+  "clangd",
+  "pyright",
+  "gopls",
+  "html",
+  "bashls",
+  "cmake",
+  "rust_analyzer",
+  "nil_ls",
+  "ts_ls",
+  "lua_ls",
+}
+
+local lspconfig = require("lspconfig")
+for _, server in ipairs(servers) do
+  lspconfig[server].setup({
+    on_attach = lsp_attach,
+  })
+end
 
 
 --------------------------------------------------------------------------------

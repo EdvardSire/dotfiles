@@ -14,6 +14,7 @@
   nil,
   rust-analyzer,
   ripgrep,
+  lua-language-server
 }:
 let
   packageName = "edvard-neovim";
@@ -72,6 +73,7 @@ symlinkJoin {
           nil
           rust-analyzer
           ripgrep
+          lua-language-server
         ]
       } \
       --add-flags '-u' \
