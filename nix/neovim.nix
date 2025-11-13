@@ -34,6 +34,7 @@ let
     vimPlugins.cmp-nvim-lsp
     vimPlugins.cmp-nvim-lsp-signature-help
     vimPlugins.luasnip
+    vimPlugins.markdown-preview-nvim
   ];
 
   foldPlugins = builtins.foldl' (
