@@ -37,7 +37,7 @@ vim.g.mapleader = " "
 vim.keymap.set("i", "jk", "<ESC>")
 vim.keymap.set("n", "<leader>w", ":w<CR>")
 vim.keymap.set("n", "<leader>n", ":noh<CR>")
-vim.keymap.set("n", "<leader>p", ":E<CR>")
+vim.keymap.set("n", "<leader>p", ":e %:h<CR>")
 vim.keymap.set('n', '<leader>d', ":put =strftime('%Y-%m-%d')<CR>")
 
 vim.api.nvim_create_autocmd("FileType", {
