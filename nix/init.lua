@@ -213,10 +213,9 @@ require("lualine").setup({
 	options = {
 		icons_enabled = true,
 		theme = "auto",
+        -- apt install fonts-powerline
 		component_separators = { left = "", right = "" },
 		section_separators = { left = "", right = "" },
-		-- component_separators = { left = '', right = ''},
-		-- section_separators = { left = '', right = ''},
 		disabled_filetypes = {
 			statusline = {},
 			winbar = {},
@@ -374,7 +373,10 @@ cmp.setup({
 	}),
 })
 
-local lsp_attach = function(_, bufnr)
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    local bufnr = args.buf
+
 	vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = bufnr })
 	vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = bufnr })
 	vim.keymap.set("n", "gr", vim.lsp.buf.references, { buffer = bufnr })
@@ -386,7 +388,8 @@ local lsp_attach = function(_, bufnr)
 	vim.keymap.set("n", "gp", vim.diagnostic.goto_prev, { buffer = bufnr })
 	vim.keymap.set("n", "gn", vim.diagnostic.goto_next, { buffer = bufnr })
 	vim.keymap.set("n", "gl", vim.diagnostic.open_float, { buffer = bufnr })
-end
+  end,
+})
 
 
 local servers = {
@@ -402,12 +405,7 @@ local servers = {
   "lua_ls",
 }
 
-local lspconfig = require("lspconfig")
-for _, server in ipairs(servers) do
-  lspconfig[server].setup({
-    on_attach = lsp_attach,
-  })
-end
+vim.lsp.enable(servers)
 
 
 --------------------------------------------------------------------------------

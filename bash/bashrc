@@ -91,6 +91,10 @@ if command -v ip &> /dev/null; then
 fi
 
 
+bak() {
+    [ $# -eq 1 ] && mv "$1" "$1.bak" || echo "Usage: $0 <file>"
+}
+
 source "$(dirname "$(realpath "${BASH_SOURCE[0]}")")/.env"
 export PATH=$HOME/dotfiles/bin:$PATH
 export PATH=$HOME/repos/zenbook-duo-2024-ux8406ma-linux:$PATH
