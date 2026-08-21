@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+VERSION=2.1.1
+HOST=${1:?usage: $0 user@host}
+
+check_remote() {
+    if [[ $(ssh "$HOST" 'cat /proc/sys/kernel/apparmor_restrict_unprivileged_userns 2>/dev/null') == 1 ]]; then
+        cat >&2 <<EOF
+ERROR: AppArmor restricts unprivileged user namespaces on $HOST.
+
+Try on the remote:
+    sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
+EOF
+        exit 1
+    fi
+}
+
+check_remote
+
+
+###
+arch=$(ssh "$HOST" 'uname -m')
+case "$arch" in
+    x86_64)  target=x86_64-unknown-linux-musl ;;
+    aarch64) target=aarch64-unknown-linux-musl ;;
+    *) echo "ERROR: unsupported remote architecture: $arch" >&2; exit 1 ;;
+esac
+
+url="https://github.com/nix-community/nix-user-chroot/releases/download/$VERSION/nix-user-chroot-bin-$VERSION-$target"
+
+echo "> installing nix-user-chroot $VERSION for $arch"
+ssh "$HOST" 'mkdir -p ~/.nixify/{bin,nix}'
+
+nix shell nixpkgs#curl -c curl -fL "$url" |
+    ssh "$HOST" 'cat > ~/.nixify/bin/nix-user-chroot && chmod +x ~/.nixify/bin/nix-user-chroot'
+
+###
+echo "> testing nix-user-chroot"
+ssh "$HOST" '~/.nixify/bin/nix-user-chroot ~/.nixify/nix bash -c "id; ls -ld /nix"'
+echo "> bootstrap works"
+
+###
+echo "> installing nix"
+nix shell nixpkgs#curl -c curl -fsSL https://nixos.org/nix/install |
+    ssh "$HOST" '~/.nixify/bin/nix-user-chroot ~/.nixify/nix bash -c "bash -s -- --no-daemon"'
+
+###
+ssh "$HOST" 'cat > ~/.nixify/enter <<'"'"'EOF'"'"'
+#!/usr/bin/env bash
+exec ~/.nixify/bin/nix-user-chroot ~/.nixify/nix \
+    bash -lc '"'"'. ~/.nix-profile/etc/profile.d/nix.sh; exec bash'"'"'
+EOF
+chmod +x ~/.nixify/enter'
+
+###
+ssh "$HOST" 'grep -qxF "alias nixify=\"\$HOME/.nixify/enter\"" ~/.bashrc 2>/dev/null ||
+    echo "alias nixify=\"\$HOME/.nixify/enter\"" >> ~/.bashrc'
