@@ -54,7 +54,10 @@ cmp.setup({
 	}),
 })
 
-local lsp_attach = function(_, bufnr)
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    local bufnr = args.buf
+
 	vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = bufnr })
 	vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = bufnr })
 	vim.keymap.set("n", "gr", vim.lsp.buf.references, { buffer = bufnr })
@@ -66,43 +69,21 @@ local lsp_attach = function(_, bufnr)
 	vim.keymap.set("n", "gp", vim.diagnostic.goto_prev, { buffer = bufnr })
 	vim.keymap.set("n", "gn", vim.diagnostic.goto_next, { buffer = bufnr })
 	vim.keymap.set("n", "gl", vim.diagnostic.open_float, { buffer = bufnr })
-end
+  end,
+})
 
 
+local servers = {
+  "clangd",
+  "pyright",
+  "gopls",
+  "html",
+  "bashls",
+  "cmake",
+  "rust_analyzer",
+  "nil_ls",
+  "ts_ls",
+  "lua_ls",
+}
 
--- Mason
-require("mason").setup()
-local lspconfig = require('lspconfig')
-
-lspconfig.clangd.setup({
-  on_attach = lsp_attach,
-  mason = false,
-})
-lspconfig.pyright.setup({
-  on_attach = lsp_attach,
-})
-lspconfig.gopls.setup({
-  on_attach = lsp_attach,
-})
-lspconfig.html.setup({
-  on_attach = lsp_attach,
-})
-lspconfig.bashls.setup({
-  on_attach = lsp_attach,
-})
-lspconfig["nil_ls"].setup({
-  on_attach = lsp_attach,
-})
-lspconfig["ts_ls"].setup({
-  on_attach = lsp_attach,
-})
-lspconfig.cmake.setup({
-  on_attach = lsp_attach,
-})
-lspconfig["rust_analyzer"].setup({
-  on_attach = lsp_attach,
-})
--- lspconfig.elixirls.setup({
---   on_attach = lsp_attach,
---   cmd = { "/home/user/.local/share/nvim/mason/packages/elixir-ls/language_server.sh" },
--- })
+vim.lsp.enable(servers)
