@@ -90,9 +90,35 @@ if command -v ip &> /dev/null; then
     }
 fi
 
+getin() {
+  docker exec -it "$(
+    docker ps --format '{{.ID}}\t{{.Image}}' |
+      fzf |
+      cut -f1
+  )" bash
+}
 
 bak() {
     [ $# -eq 1 ] && mv "$1" "$1.bak" || echo "Usage: $0 <file>"
+}
+
+pdf-is-pass-protected() {
+  nix-shell -p qpdf --run 'for f in ./*.pdf; do [ -e "$f" ] && qpdf --requires-password "$f" >/dev/null 2>&1 && echo "$f"; done'
+}
+pdf-unlock() {
+  local input="$1"
+  local dir base output password
+
+  dir="$(dirname "$input")"
+  base="$(basename "$input")"
+  output="${2:-$dir/unlocked-$base}"
+
+  read -rsp "PDF password: " password
+  echo
+
+  INPUT="$input" OUTPUT="$output" PASSWORD="$password" \
+    nix-shell -p qpdf --run \
+    'qpdf --password="$PASSWORD" --decrypt "$INPUT" "$OUTPUT"'
 }
 
 source "$(dirname "$(realpath "${BASH_SOURCE[0]}")")/.env"
